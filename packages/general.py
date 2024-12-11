@@ -1,6 +1,7 @@
 import random
-import packages.file_system as fs 
 import json
+import packages.file_system as fs 
+import packages.date_time as date_time 
 
 # get random number
 def generateRandomNumber(start,end):
@@ -15,16 +16,22 @@ def convertDictionaryToString(dictionary):
 def convertIntegerToString(number):
 	return str(number)
 
-def readAllDataFromFile(path):
-	with open(path, 'r') as file:
-		data = json.load(file)
-	return data
-
 def getRandomNumberFromFile(file_path):
 	if not fs.isFileExisted(file_path):
 		fs.createFile(file_path)
 		random_number = generateRandomNumber(1,19)
 		fs.saveIntoFfile(file_path,convertDictionaryToString({"is_broadcast_on":False,"random_number":random_number}))
 		return convertIntegerToString(random_number)
-	random_number = readAllDataFromFile(file_path).get("random_number")	
+	random_number = fs.readAllDataFromFile(file_path).get("random_number")	
 	return convertIntegerToString(random_number)
+
+def getLastAzanTime():
+	if not fs.isFileExisted(fs.TIMES_FILE_PATH):
+		return None
+	# while True:
+	all_times = fs.readAllDataFromFile(fs.TIMES_FILE_PATH)
+	if len(all_times)==0:
+		return None
+	today_times = all_times[0]
+	if date_time.compareTodayWith(today_times.get("date"))==1:
+		fs.removeFirstDay(all_times)
