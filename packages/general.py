@@ -55,3 +55,8 @@ def getLastAzanTime():
 				today_times = all_times[0]
 				return {"azan_time":today_times.get("sobuh"),"is_sobuh":True}
 			return None
+		
+def getQuranTime(random_number,azan_time):
+	duration = fs.getSoundDuration(random_number)
+	quran_time = date_time.removeSecondsFromTime(duration,azan_time)
+	print(quran_time)

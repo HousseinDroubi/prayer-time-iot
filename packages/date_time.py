@@ -1,4 +1,5 @@
-from datetime import datetime
+from datetime import datetime,timedelta
+import packages.general as general
 
 # Get today with dd/mm/yyyy
 def getTodayDate():
@@ -36,3 +37,8 @@ def getNumberOfDaysBetweenTwoDates(date_1,date_2):
     date_2_obj = datetime.strptime(date_2, '%d/%m/%Y')
     date_diff = date_2_obj - date_1_obj
     return date_diff.days
+
+def removeSecondsFromTime(seconds,time):
+    time = datetime.strptime(general.convertIntegerToString(time), "%H:%M")
+    time = time - timedelta(seconds=seconds)
+    return time.strftime("%H:%M")

@@ -6,7 +6,7 @@ def __init__():
     if last_azan is None:
         return None
     random_number = general.getRandomNumberFromFile(file_system.INFO_FILE_PATH)
-    print(last_azan)
-    print(random_number)
+    quran_time = general.getQuranTime(random_number,last_azan.get("azan_time"))
+    print(quran_time)
 
 __init__()

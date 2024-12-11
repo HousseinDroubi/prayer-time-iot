@@ -1,6 +1,8 @@
 import os
 import json
+import math
 import packages.general as general
+from pydub.utils import mediainfo
 
 INFO_FILE_PATH = "info.json"
 TIMES_FILE_PATH = "times.json"
@@ -37,3 +39,9 @@ def readAllDataFromFile(path):
 	with open(path, 'r') as file:
 		data = json.load(file)
 	return data
+
+# Get sound duration
+def getSoundDuration(random_number):
+	file_path = f'quran/quran_{random_number}.mp3'
+	audio_info = mediainfo(file_path)
+	return math.ceil(float(audio_info['duration'])) + 10
