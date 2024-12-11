@@ -1,10 +1,10 @@
 import os
 
-INFO_FILE_PATH = "info.txt"
+INFO_FILE_PATH = "info.json"
 
 # clear file contents
 def clearFile(path):
-	with open(path,'w') as file:
+	with open(path,'w'):
 		print(f"clearing file {path}")
 		pass
 
