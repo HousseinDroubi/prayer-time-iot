@@ -8,20 +8,16 @@ def generateRandomNumber(start,end):
 	return random.randint(start, end)
 	
 # Conversions
-
-#Convert from dictionary to string
+#Convert from dictionary to string to save inside json file
 def convertDictionaryToString(dictionary):
 	return json.dumps(dictionary,indent=2)
-
-def convertStringToDictionary(string):
-	return eval(string)
 
 def convertIntegerToString(number):
 	return str(number)
 
-def readFirstLineFromFile(path):
+def readAllDataFromFile(path):
 	with open(path, 'r') as file:
-		data = file.readline()
+		data = json.load(file)
 	return data
 
 def getRandomNumberFromFile(file_path):
@@ -30,5 +26,5 @@ def getRandomNumberFromFile(file_path):
 		random_number = generateRandomNumber(1,19)
 		fs.saveIntoFfile(file_path,convertDictionaryToString({"is_broadcast_on":False,"random_number":random_number}))
 		return convertIntegerToString(random_number)
-	random_number = convertStringToDictionary(readFirstLineFromFile(file_path)).get("random_number")	
+	random_number = readAllDataFromFile(file_path).get("random_number")	
 	return convertIntegerToString(random_number)
