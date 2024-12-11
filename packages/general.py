@@ -5,7 +5,6 @@ import packages.date_time as date_time
 
 # get random number
 def generateRandomNumber(start,end):
-	print("Getting random number")
 	return random.randint(start, end)
 	
 # Conversions
@@ -59,4 +58,4 @@ def getLastAzanTime():
 def getQuranTime(random_number,azan_time):
 	duration = fs.getSoundDuration(random_number)
 	quran_time = date_time.removeSecondsFromTime(duration,azan_time)
-	print(quran_time)
+	return quran_time
