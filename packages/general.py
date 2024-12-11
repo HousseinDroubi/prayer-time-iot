@@ -48,12 +48,10 @@ def getLastAzanTime():
 					return None
 				else:
 					today_times = all_times[1]
-					print(today_times)
 					fs.removeFirstDay(all_times)
 					return {"azan_time":today_times.get("sobuh"),"is_sobuh":True}
 		else:
 			if date_time.getNumberOfDaysBetweenTwoDates(date_time.getTodayDate(),all_times[0].get("date"))==1:
 				today_times = all_times[0]
-				print(today_times)
 				return {"azan_time":today_times.get("sobuh"),"is_sobuh":True}
 			return None
