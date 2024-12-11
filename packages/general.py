@@ -28,10 +28,19 @@ def getRandomNumberFromFile(file_path):
 def getLastAzanTime():
 	if not fs.isFileExisted(fs.TIMES_FILE_PATH):
 		return None
-	# while True:
-	all_times = fs.readAllDataFromFile(fs.TIMES_FILE_PATH)
-	if len(all_times)==0:
-		return None
-	today_times = all_times[0]
-	if date_time.compareTodayWith(today_times.get("date"))==1:
-		fs.removeFirstDay(all_times)
+	while True:
+		all_times = fs.readAllDataFromFile(fs.TIMES_FILE_PATH)
+		if len(all_times)==0:
+			return None
+		today_times = all_times[0]
+		if date_time.compareTodayWith(today_times.get("date"))==1:
+			fs.removeFirstDay(all_times)
+		else:
+			if date_time.compareCurrentTimeWith(today_times.get("sobuh"))!=1:
+				return {"azan_time":today_times.get("sobuh"),"is_sobuh":True}
+			elif date_time.compareCurrentTimeWith(today_times.get("dohur"))!=1:
+				return {"azan_time":today_times.get("dohur"),"is_sobuh":False}
+			elif date_time.compareCurrentTimeWith(today_times.get("meghreb"))!=1:
+				return {"azan_time":today_times.get("meghreb"),"is_sobuh":False}
+			else:
+				fs.removeFirstDay(all_times)
