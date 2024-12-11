@@ -9,7 +9,6 @@ TIMES_FILE_PATH = "times.json"
 
 def removeFirstDay(all_times):
 	all_times.pop(0)
-	print(all_times)
 	all_times = general.convertDictionaryToString(all_times)
 	saveIntoFfile(TIMES_FILE_PATH,all_times)
 

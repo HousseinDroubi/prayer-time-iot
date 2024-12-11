@@ -35,7 +35,7 @@ def getLastAzanTime():
 		today_times = all_times[0]
 		if date_time.compareTodayWith(today_times.get("date"))==1:
 			fs.removeFirstDay(all_times)
-		else:
+		elif date_time.compareTodayWith(today_times.get("date"))==0:
 			if date_time.compareCurrentTimeWith(today_times.get("sobuh"))!=1:
 				return {"azan_time":today_times.get("sobuh"),"is_sobuh":True}
 			elif date_time.compareCurrentTimeWith(today_times.get("dohur"))!=1:
@@ -43,4 +43,17 @@ def getLastAzanTime():
 			elif date_time.compareCurrentTimeWith(today_times.get("meghreb"))!=1:
 				return {"azan_time":today_times.get("meghreb"),"is_sobuh":False}
 			else:
-				fs.removeFirstDay(all_times)
+				if(len(all_times)==1):
+					fs.removeFirstDay(all_times)
+					return None
+				else:
+					today_times = all_times[1]
+					print(today_times)
+					fs.removeFirstDay(all_times)
+					return {"azan_time":today_times.get("sobuh"),"is_sobuh":True}
+		else:
+			if date_time.getNumberOfDaysBetweenTwoDates(date_time.getTodayDate(),all_times[0].get("date"))==1:
+				today_times = all_times[0]
+				print(today_times)
+				return {"azan_time":today_times.get("sobuh"),"is_sobuh":True}
+			return None
