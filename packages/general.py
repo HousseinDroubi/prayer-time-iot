@@ -1,5 +1,6 @@
 import random
 import packages.file_system as fs 
+import json
 
 # get random number
 def generateRandomNumber(start,end):
@@ -10,7 +11,7 @@ def generateRandomNumber(start,end):
 
 #Convert from dictionary to string
 def convertDictionaryToString(dictionary):
-	return str(dictionary)
+	return json.dumps(dictionary,indent=2)
 
 def convertStringToDictionary(string):
 	return eval(string)
