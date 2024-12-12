@@ -3,6 +3,8 @@ import json
 import math
 import packages.general as general
 from pydub.utils import mediainfo
+from pydub import AudioSegment
+from pydub.playback import play
 
 INFO_FILE_PATH = "info.json"
 TIMES_FILE_PATH = "times.json"
@@ -42,3 +44,12 @@ def getSoundDuration(random_number):
 	file_path = f'quran/quran_{random_number}.mp3'
 	audio_info = mediainfo(file_path)
 	return math.ceil(float(audio_info['duration'])) + 10
+
+# Play sound
+def playSound(random_number,is_adan=False):
+	if(is_adan):
+		sound = AudioSegment.from_file("./adan/adan.mp3")
+	else:
+		sound = AudioSegment.from_file(f"./quran/quran_{random_number}.mp3")
+	play(sound)
+
