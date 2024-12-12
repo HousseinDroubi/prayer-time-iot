@@ -7,7 +7,9 @@ def getTodayDate():
     return datetime.today().strftime('%d/%m/%Y')
 
 # Get current time with hh:mm in 24-hours format
-def getCurrentTime():
+def getCurrentTime(is_with_seconds=False):
+    if is_with_seconds:
+        return datetime.now().strftime("%H:%M:%S")
     return datetime.now().strftime("%H:%M")
 
 # Compare today with other day and return -1 if today is greater, 1 if other day is greater and 0 if there both are equals
@@ -51,4 +53,15 @@ def waitUntil(wait_until_time):
     time_diff = (target_time - now).total_seconds()
     if(time_diff<0):
         return
+    print(f"Waiting {time_diff//3600} hours or {time_diff//60} minutes or {time_diff}")
     time.sleep(time_diff)
+
+def getSecondsFromMeghrebToSobuh(sobuh_azan_time):
+    current_time = datetime.now()
+    given_time = datetime.strptime(sobuh_azan_time, "%H:%M")
+    given_time = given_time.replace(year=current_time.year, month=current_time.month, day=current_time.day)
+    if given_time <= current_time:
+        given_time += timedelta(days=1)
+    time_difference = given_time - current_time
+    seconds_difference = time_difference.total_seconds()
+    return seconds_difference
