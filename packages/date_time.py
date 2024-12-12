@@ -1,5 +1,6 @@
 from datetime import datetime,timedelta
 import packages.general as general
+import time
 
 # Get today with dd/mm/yyyy
 def getTodayDate():
@@ -42,3 +43,12 @@ def removeSecondsFromTime(seconds,time):
     time = datetime.strptime(general.convertIntegerToString(time), "%H:%M")
     time = time - timedelta(seconds=seconds)
     return time.strftime("%H:%M")
+
+# wait function
+def waitUntil(wait_until_time):
+    now = datetime.now()
+    target_time = datetime.strptime(wait_until_time,"%H:%M").replace(year=now.year, month=now.month, day=now.day)
+    time_diff = (target_time - now).total_seconds()
+    if(time_diff<0):
+        return
+    time.sleep(time_diff)
