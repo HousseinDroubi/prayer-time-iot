@@ -1,5 +1,6 @@
 import sys
 sys.path.append('/home/pi-user/lcd')
+sys.path.append('/home/pi-user/pydub')
 
 import packages.general as general
 import packages.file_system as file_system
