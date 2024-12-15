@@ -5,6 +5,8 @@ import packages.general as general
 from pydub.utils import mediainfo
 from pydub import AudioSegment
 from pydub.playback import play
+import RPi.GPIO as GPIO
+import time
 
 INFO_FILE_PATH = "info.json"
 TIMES_FILE_PATH = "times.json"
@@ -47,9 +49,18 @@ def getSoundDuration(random_number):
 
 # Play sound
 def playSound(random_number,is_adan=False):
+	GPIO.output(37,GPIO.HIGH) # Open relay
+	time.sleep(5)
+	update_info = readAllDataFromFile(INFO_FILE_PATH)
+	update_info["is_broadcast_on"]=True
+	saveIntoFfile(INFO_FILE_PATH,general.convertDictionaryToString(update_info))
 	if(is_adan):
 		sound = AudioSegment.from_file("./adan/adan.mp3")
 	else:
 		sound = AudioSegment.from_file(f"./quran/quran_{random_number}.mp3")
 	play(sound)
+	time.sleep(1)
+	GPIO.output(37,GPIO.LOW)# Close relay
+	update_info["is_broadcast_on"]=False
+	saveIntoFfile(INFO_FILE_PATH,general.convertDictionaryToString(update_info))
 
