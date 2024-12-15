@@ -3,6 +3,7 @@ import json
 import packages.file_system as fs 
 import packages.date_time as date_time 
 import RPi.GPIO as GPIO
+import time
 
 # initialize board
 def initialization():
@@ -27,6 +28,20 @@ def turnOffLED():
 # scan switch
 def scanSwitch():
 	return not GPIO.input(18)
+
+def turnOnIzaa():
+	time.sleep(0.3)
+	GPIO.output(37,GPIO.HIGH) # Open relay
+	update_info = fs.readAllDataFromFile(fs.INFO_FILE_PATH)
+	update_info["is_broadcast_on"] = True
+	fs.saveIntoFfile(fs.INFO_FILE_PATH,update_info)
+
+def turnOffIzaa():
+	time.sleep(0.3)
+	GPIO.output(37,GPIO.LOW) # Open relay
+	update_info = fs.readAllDataFromFile(fs.INFO_FILE_PATH)
+	update_info["is_broadcast_on"] = False
+	fs.saveIntoFfile(fs.INFO_FILE_PATH,update_info)
 
 def showTimes(display,quran_time,azan_time,is_error = False):
 	if is_error:
