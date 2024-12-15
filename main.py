@@ -1,17 +1,30 @@
+import sys
+sys.path.append('/home/pi-user/lcd')
+
 import packages.general as general
 import packages.file_system as file_system
 import packages.date_time as date_time
 import time
+import drivers
 
+display = drivers.Lcd()
 def __init__():
+    general.initialization()
+
+# TODO inshalla
+# implement this as thread
+def loop():
     last_azan = general.getLastAzanTime()
     print(f"azan_time is {last_azan.get("azan_time")}")
     if last_azan is None:
+        general.showTimes(display,is_error=True)
         return None
     random_number = general.getRandomNumberFromFile(file_system.INFO_FILE_PATH)
     print(f"random_number is {random_number}")
     quran_time = general.getQuranTime(random_number,last_azan.get("azan_time"))
     print(f"quran_time is {quran_time}")
+
+    general.showTimes(display,quran_time,last_azan.get("azan_time"))
 
     # Time is the same as quran time
     if date_time.compareCurrentTimeWith(quran_time) == 0:
@@ -41,5 +54,15 @@ def __init__():
             print(f"Waiting {time_to_wait//3600} hours or {time_to_wait//60} minutes or {time_to_wait}")
             time.sleep(time_to_wait)
         time.sleep(1)
-while True:
+
+try:
     __init__()
+    while True:
+        loop()
+except KeyboardInterrupt:
+    display.lcd_clear()
+    general.cleanUp()
+    
+
+# TODO inshalla
+# implement another thread for mic
