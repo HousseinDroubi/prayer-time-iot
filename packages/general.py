@@ -10,6 +10,18 @@ def initialization():
 	GPIO.setwarnings(False)
 	GPIO.setup(37,GPIO.OUT) # This is to control the relay
 
+# clean up gpio pins
+def cleanUp():
+	GPIO.cleanup()
+
+def showTimes(display,quran_time,azan_time,is_error = False):
+	if is_error:
+		display.lcd_display_string(" Something went ",1)
+		display.lcd_display_string("      wrong     ",2)
+		return
+	display.lcd_display_string(f"Quran at: {quran_time}", 1)
+	display.lcd_display_string(f"Azan at: {azan_time}", 2)
+
 # get random number
 def generateRandomNumber(start,end):
 	return random.randint(start, end)
