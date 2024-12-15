@@ -63,6 +63,16 @@ except KeyboardInterrupt:
     display.lcd_clear()
     general.cleanUp()
     
+def secondJob():
+    while True:
+        is_switch_opened = general.scanSwitch()
+        if is_switch_opened:
+            general.turnOnLED()
+            general.turnOnIzaa()
+        else:
+            general.turnOffLED()
+            general.turnOffIzaa()
+        time.sleep(0.3)
 
 # TODO inshalla
 # implement another thread for mic
