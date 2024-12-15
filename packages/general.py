@@ -24,6 +24,10 @@ def turnOnLED():
 def turnOffLED():
 	GPIO.output(16,GPIO.LOW)
 
+# scan switch
+def scanSwitch():
+	return not GPIO.input(18)
+
 def showTimes(display,quran_time,azan_time,is_error = False):
 	if is_error:
 		display.lcd_display_string(" Something went ",1)
