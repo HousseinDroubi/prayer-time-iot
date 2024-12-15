@@ -16,6 +16,14 @@ def initialization():
 def cleanUp():
 	GPIO.cleanup()
 
+# Turn on LED
+def turnOnLED():
+	GPIO.output(16,GPIO.HIGH)
+
+# Turn off LED
+def turnOffLED():
+	GPIO.output(16,GPIO.LOW)
+
 def showTimes(display,quran_time,azan_time,is_error = False):
 	if is_error:
 		display.lcd_display_string(" Something went ",1)
