@@ -2,6 +2,13 @@ import random
 import json
 import packages.file_system as fs 
 import packages.date_time as date_time 
+import RPi.GPIO as GPIO
+
+# initialize board
+def initialization():
+	GPIO.setmode(GPIO.BOARD)
+	GPIO.setwarnings(False)
+	GPIO.setup(37,GPIO.OUT) # This is to control the relay
 
 # get random number
 def generateRandomNumber(start,end):
