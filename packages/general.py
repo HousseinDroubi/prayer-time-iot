@@ -11,7 +11,7 @@ def initialization():
 	GPIO.setwarnings(False)
 	GPIO.setup(37,GPIO.OUT) # This is to control the relay
 	GPIO.setup(16,GPIO.OUT) # This is for mic led
-	GPIO.setup(18,GPIO.IN,pull_up_down=GPIO.PUD) # This is for reading switch
+	GPIO.setup(18,GPIO.IN,pull_up_down=GPIO.PUD_UP) # This is for reading switch
 
 # clean up gpio pins
 def cleanUp():
