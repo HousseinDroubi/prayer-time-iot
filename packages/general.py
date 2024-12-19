@@ -5,43 +5,33 @@ import packages.date_time as date_time
 import RPi.GPIO as GPIO
 import time
 
-# initialize board
-def initialization():
-	GPIO.setmode(GPIO.BOARD)
-	GPIO.setwarnings(False)
-	GPIO.setup(37,GPIO.OUT) # This is to control the relay
-	GPIO.setup(16,GPIO.OUT) # This is for mic led
-	GPIO.setup(18,GPIO.IN,pull_up_down=GPIO.PUD_UP) # This is for reading switch
-
 # clean up gpio pins
 def cleanUp():
 	GPIO.cleanup()
 
 # Turn on LED
-def turnOnLED():
-	GPIO.output(16,GPIO.HIGH)
-
-# Turn off LED
-def turnOffLED():
-	GPIO.output(16,GPIO.LOW)
+def turnLED(is_to_on=True):
+	if is_to_on:
+		GPIO.output(16,GPIO.HIGH)
+	else:
+		GPIO.output(16,GPIO.LOW)
 
 # scan switch
 def scanSwitch():
 	return not GPIO.input(18)
 
-def turnOnIzaa():
+def turnIzaa(is_from_mic=True,is_to_on=True):
 	time.sleep(0.3)
-	GPIO.output(37,GPIO.HIGH) # Open relay
-	update_info = fs.readAllDataFromFile(fs.INFO_FILE_PATH)
-	update_info["is_broadcast_on"] = True
-	fs.saveIntoFfile(fs.INFO_FILE_PATH,update_info)
-
-def turnOffIzaa():
-	time.sleep(0.3)
-	GPIO.output(37,GPIO.LOW) # Open relay
-	update_info = fs.readAllDataFromFile(fs.INFO_FILE_PATH)
-	update_info["is_broadcast_on"] = False
-	fs.saveIntoFfile(fs.INFO_FILE_PATH,update_info)
+	if is_from_mic:
+		if is_to_on:
+			GPIO.output(37,GPIO.HIGH) # Open relay from main program
+		else:
+			GPIO.output(37,GPIO.LOW)# Close relay from main program
+	else:
+		if is_to_on:
+			GPIO.output(36,GPIO.HIGH) # Open relay from mic program
+		else:
+			GPIO.output(36,GPIO.LOW)
 
 def showTimes(display,quran_time,azan_time,is_error = False):
 	if is_error:
@@ -49,7 +39,7 @@ def showTimes(display,quran_time,azan_time,is_error = False):
 		display.lcd_display_string("      wrong     ",2)
 		return
 	display.lcd_display_string(f"Quran at: {quran_time}", 1)
-	display.lcd_display_string(f"Azan at: {azan_time}", 2)
+	display.lcd_display_string(f" Azan at: {azan_time} ", 2)
 
 # get random number
 def generateRandomNumber(start,end):
@@ -64,12 +54,7 @@ def convertIntegerToString(number):
 	return str(number)
 
 def getRandomNumberFromFile(file_path):
-	if not fs.isFileExisted(file_path):
-		fs.createFile(file_path)
-		random_number = generateRandomNumber(1,19)
-		fs.saveIntoFfile(file_path,convertDictionaryToString({"is_broadcast_on":False,"random_number":random_number}))
-		return convertIntegerToString(random_number)
-	random_number = fs.readAllDataFromFile(file_path).get("random_number")	
+	random_number = generateRandomNumber(1,19)
 	return convertIntegerToString(random_number)
 
 def getLastAzanTime():

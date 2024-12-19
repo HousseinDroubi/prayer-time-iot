@@ -8,15 +8,23 @@ import packages.date_time as date_time
 import time
 import drivers
 import threading
+import RPi.GPIO as GPIO
 
 display = drivers.Lcd()
-def __init__():
-    general.initialization()
+
+GPIO.setmode(GPIO.BOARD)
+GPIO.setwarnings(False)
+GPIO.setup(36,GPIO.OUT)
+GPIO.setup(37,GPIO.OUT)
+GPIO.setup(16,GPIO.OUT) # This is for mic led
+GPIO.setup(18,GPIO.IN,pull_up_down=GPIO.PUD_UP) # This is for reading switch
+general.turnIzaa(is_to_on=False)
+general.turnIzaa(is_from_mic=False,is_to_on=False)
 
 def mainProgram():
     while True:
         last_azan = general.getLastAzanTime()
-        print(f"azan_time is {last_azan.get("azan_time")}")
+        print(f'azan_time is {last_azan.get("azan_time")}')
         if last_azan is None:
             general.showTimes(display,is_error=True)
             return None
@@ -60,14 +68,12 @@ def micProgram():
     while True:
         is_switch_opened = general.scanSwitch()
         if is_switch_opened:
-            general.turnOnLED()
-            general.turnOnIzaa()
+            general.turnLED()
+            general.turnIzaa()
         else:
-            general.turnOffLED()
-            general.turnOffIzaa()
+            general.turnLED(is_to_on=False)
+            general.turnIzaa(is_to_on=False)
         time.sleep(0.3)
-
-__init__()
 
 try:
     main_thread = threading.Thread(target=mainProgram)
