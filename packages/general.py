@@ -9,7 +9,7 @@ import time
 def cleanUp():
 	GPIO.cleanup()
 
-# Turn on LED
+# toggle LED
 def turnLED(is_to_on=True):
 	if is_to_on:
 		GPIO.output(16,GPIO.HIGH)
@@ -20,6 +20,7 @@ def turnLED(is_to_on=True):
 def scanSwitch():
 	return not GPIO.input(18)
 
+# toggle izaa 
 def turnIzaa(is_from_mic=True,is_to_on=True):
 	time.sleep(0.3)
 	if is_from_mic:
@@ -31,7 +32,7 @@ def turnIzaa(is_from_mic=True,is_to_on=True):
 		if is_to_on:
 			GPIO.output(36,GPIO.HIGH) # Open relay from mic program
 		else:
-			GPIO.output(36,GPIO.LOW)
+			GPIO.output(36,GPIO.LOW) # Close relay from mic program
 
 def showTimes(display,quran_time,azan_time,is_error = False):
 	if is_error:
@@ -53,7 +54,7 @@ def convertDictionaryToString(dictionary):
 def convertIntegerToString(number):
 	return str(number)
 
-def getRandomNumberFromFile(file_path):
+def getRandomNumberFromFile():
 	random_number = generateRandomNumber(1,19)
 	return convertIntegerToString(random_number)
 

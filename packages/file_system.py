@@ -47,13 +47,17 @@ def getSoundDuration(random_number):
 	return math.ceil(float(audio_info['duration'])) + 10
 
 # Play sound
-def playSound(random_number,is_adan=False):
+def playSound(random_number,is_adan_and_quran=False):
 	general.turnIzaa(is_from_mic=False)
 	time.sleep(5)
-	if(is_adan):
-		sound = AudioSegment.from_file("./adan/adan.mp3")
-	else:
+	if(is_adan_and_quran):
 		sound = AudioSegment.from_file(f"./quran/quran_{random_number}.mp3")
-	play(sound)
+		play(sound)
+		time.sleep(1)
+		sound = AudioSegment.from_file("./adan/adan.mp3")
+		play(sound)
+	else:
+		sound = AudioSegment.from_file("./adan/adan.mp3")
+		play(sound)
 	time.sleep(1)
 	general.turnIzaa(is_from_mic=False,is_to_on=False)
