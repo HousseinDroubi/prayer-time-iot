@@ -7,6 +7,7 @@ from pydub import AudioSegment
 from pydub.playback import play
 import RPi.GPIO as GPIO
 import time
+import date_time as dt
 
 TIMES_FILE_PATH = "times.json"
 
@@ -46,18 +47,25 @@ def getSoundDuration(random_number):
 	audio_info = mediainfo(file_path)
 	return math.ceil(float(audio_info['duration'])) + 10
 
+# Play azan
+def playAzan():
+	sound = AudioSegment.from_file("./adan/adan.mp3")
+	play(sound)
+
+# Play quran
+def playQuran(random_number):
+	sound = AudioSegment.from_file(f"./quran/quran_{random_number}.mp3")
+	play(sound)
+	
 # Play sound
-def playSound(random_number,is_adan_and_quran=False):
+def playSound(random_number,is_adan_and_quran=False,azan_time=None):
 	general.turnIzaa(is_from_mic=False)
 	time.sleep(5)
-	if(is_adan_and_quran):
-		sound = AudioSegment.from_file(f"./quran/quran_{random_number}.mp3")
-		play(sound)
-		time.sleep(1)
-		sound = AudioSegment.from_file("./adan/adan.mp3")
-		play(sound)
+	if not is_adan_and_quran:
+		playAzan()
 	else:
-		sound = AudioSegment.from_file("./adan/adan.mp3")
-		play(sound)
+		playQuran(random_number=random_number)
+		dt.waitUntil(azan_time)
+		playAzan()
 	time.sleep(1)
 	general.turnIzaa(is_from_mic=False,is_to_on=False)

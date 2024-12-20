@@ -26,58 +26,54 @@ time.sleep(3)
 def mainProgram():
     while True:
         last_azan = general.getLastAzanTime()
-        print(f'azan_time is {last_azan.get("azan_time")}')
         if last_azan is None:
             general.showTimes(display,is_error=True)
             return None
         random_number = general.getRandomNumberFromFile()
-        print(f"random_number is {random_number}")
-        quran_time = general.getQuranTime(random_number,last_azan.get("azan_time"))
+        azan_time=last_azan.get("azan_time")
+        quran_time = general.getQuranTime(random_number,azan_time)
+
         print(f"quran_time is {quran_time}")
+        print(f"random_number is {random_number}")
+        print(f'azan_time is {azan_time}')
 
-        general.showTimes(display,quran_time,last_azan.get("azan_time"))
-
+        #show times
+        general.showTimes(display,quran_time,azan_time)
+        
         # Time is the same as quran time
         if date_time.compareCurrentTimeWith(quran_time) == 0:
             # Dohur or meghreb times
             if not last_azan.get("is_sobuh"):
-                file_system.playSound(random_number=random_number,is_adan_and_quran=True)
-                print(1)
+                file_system.playSound(random_number=random_number,is_adan_and_quran=True,azan_time=azan_time)
             # Sobuh time
             else:
-                date_time.waitUntil(last_azan.get("azan_time"))
-                file_system.playSound(None,False)
-                print(2)
+                date_time.waitUntil(azan_time)
+                file_system.playSound(random_number=None,is_adan_and_quran=False,azan_time=None)
         # Time is before quran time
         elif date_time.compareCurrentTimeWith(quran_time)==-1:
             # Dohur or meghreb times
             if not last_azan.get("is_sobuh"):
                 date_time.waitUntil(quran_time)
-                file_system.playSound(random_number=random_number,is_adan_and_quran=True)
-                print(3)
+                file_system.playSound(random_number=random_number,is_adan_and_quran=True,azan_time=azan_time)
             # Sobuh time
             else:
-                date_time.waitUntil(last_azan.get("azan_time"))
-                file_system.playSound(None,False)
-                print(4)
+                date_time.waitUntil(azan_time)
+                file_system.playSound(random_number=None,is_adan_and_quran=False,azan_time=None)
         # Time is after quran time
         else:
             # Time is after quran time and the same as azan time
-            if date_time.compareCurrentTimeWith(last_azan.get("azan_time"))==0:
-                file_system.playSound(None,False) #Only Azan
-                print(5)
+            if date_time.compareCurrentTimeWith(azan_time)==0:
+                file_system.playSound(random_number=None,is_adan_and_quran=False,azan_time=None)#Only Azan
             # Time is after quran time and before azan time
-            elif date_time.compareCurrentTimeWith(last_azan.get("azan_time"))==-1:
-                date_time.waitUntil(last_azan.get("azan_time"))
-                file_system.playSound(None,False) #Only Azan
-                print(6)
+            elif date_time.compareCurrentTimeWith(azan_time)==-1:
+                date_time.waitUntil(azan_time)
+                file_system.playSound(random_number=None,is_adan_and_quran=False,azan_time=None)#Only Azan
             # Time is after quran time and after azan time whcih is after meghreb time
             else:
-                time_to_wait = date_time.getSecondsFromMeghrebToSobuh(sobuh_azan_time=last_azan.get("azan_time"))
+                time_to_wait = date_time.getSecondsFromMeghrebToSobuh(sobuh_azan_time=azan_time)
                 print(f"Waiting {time_to_wait//3600} hours or {time_to_wait//60} minutes or {time_to_wait}")
                 time.sleep(time_to_wait)
-                file_system.playSound(None,False)
-                print(7)
+                file_system.playSound(random_number=None,is_adan_and_quran=False,azan_time=None)#Only Azan
             time.sleep(1)
 
 def micProgram():

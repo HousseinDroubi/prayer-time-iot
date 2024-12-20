@@ -66,27 +66,37 @@ def getLastAzanTime():
 		if len(all_times)==0:
 			return None
 		today_times = all_times[0]
+		# If today is greater than first day in json
 		if date_time.compareTodayWith(today_times.get("date"))==1:
 			fs.removeFirstDay(all_times)
+		# If today is the same as first day in json
 		elif date_time.compareTodayWith(today_times.get("date"))==0:
+			# If current time is the same as sobuh or less than it
 			if date_time.compareCurrentTimeWith(today_times.get("sobuh"))!=1:
 				return {"azan_time":today_times.get("sobuh"),"is_sobuh":True}
+			# If current time is the same as dohur or less than it
 			elif date_time.compareCurrentTimeWith(today_times.get("dohur"))!=1:
 				return {"azan_time":today_times.get("dohur"),"is_sobuh":False}
+			# If current time is the same as meghreb or less than it
 			elif date_time.compareCurrentTimeWith(today_times.get("meghreb"))!=1:
 				return {"azan_time":today_times.get("meghreb"),"is_sobuh":False}
 			else:
+				# If current time is the greater than meghreb and only one today left in json which must be deleted
 				if(len(all_times)==1):
 					fs.removeFirstDay(all_times)
 					return None
+				# If current time is the greater than meghreb and today with other days left in json, so only today must be deleted and must return second day's sobuh
 				else:
 					today_times = all_times[1]
 					fs.removeFirstDay(all_times)
 					return {"azan_time":today_times.get("sobuh"),"is_sobuh":True}
+		# If today is less than first day in json
 		else:
+			# If there's only the as difference between today and first day in json is "one", means that today is deleted from json and must return second day's sobuh
 			if date_time.getNumberOfDaysBetweenTwoDates(date_time.getTodayDate(),all_times[0].get("date"))==1:
 				today_times = all_times[0]
 				return {"azan_time":today_times.get("sobuh"),"is_sobuh":True}
+			# If there are many days difference between today and first day in json
 			return None
 		
 def getQuranTime(random_number,azan_time):
