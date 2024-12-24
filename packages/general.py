@@ -34,7 +34,7 @@ def turnIzaa(is_from_mic=True,is_to_on=True):
 		else:
 			GPIO.output(36,GPIO.LOW) # Close relay from mic program
 
-def showTimes(display,quran_time,azan_time,is_error = False):
+def showTimes(display,quran_time,azan_time,is_sobuh_now=False,is_error = False):
 	if is_error:
 		display.lcd_display_string(" Something went ",1)
 		display.lcd_display_string("      wrong     ",2)
