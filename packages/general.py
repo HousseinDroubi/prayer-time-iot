@@ -39,7 +39,10 @@ def showTimes(display,quran_time,azan_time,is_sobuh_now=False,is_error = False):
 		display.lcd_display_string(" Something went ",1)
 		display.lcd_display_string("      wrong     ",2)
 		return
-	display.lcd_display_string(f"Quran at: {quran_time}", 1)
+	if is_sobuh_now:
+		display.lcd_display_string(f" -------------- ", 1)
+	else:	
+		display.lcd_display_string(f"Quran at: {quran_time}", 1)
 	display.lcd_display_string(f" Azan at: {azan_time} ", 2)
 
 # get random number
