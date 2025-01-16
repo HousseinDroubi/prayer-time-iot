@@ -44,14 +44,17 @@ def readAllDataFromFile(path):
 # Get sound duration
 def getSoundDuration(random_number):
 	file_path = f'quran/quran_{random_number}.mp3'
+	print(f"file_path is {file_path}")
 	audio_info = mediainfo(file_path)
+	print(f"audio_info is {audio_info}")
 	return math.ceil(float(audio_info['duration'])) + 10
 
 # Play azan
 def playAzan(is_sobuh_now=False):
-	sound = AudioSegment.from_file("./adan/adan.mp3")
+	random_number_for_azan = general.generateRandomNumber(1,3)
+	sound = AudioSegment.from_file(f"./azan/azan_{random_number_for_azan}.mp3")
 	if is_sobuh_now:
-		sound = sound - 5
+		sound = sound - 3
 	play(sound)
 
 # Play quran
