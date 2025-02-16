@@ -43,10 +43,8 @@ def readAllDataFromFile(path):
 
 # Get sound duration
 def getSoundDuration(random_number):
-	file_path = f'quran/quran_{random_number}.mp3'
-	print(f"file_path is {file_path}")
+	file_path = f'./quran/quran_{random_number}.mp3'
 	audio_info = mediainfo(file_path)
-	print(f"audio_info is {audio_info}")
 	return math.ceil(float(audio_info['duration'])) + 10
 
 # Play azan
