@@ -13,8 +13,9 @@ def getCurrentTime(is_with_seconds=False):
     return datetime.now().strftime("%H:%M")
 
 # Compare today with other day and return -1 if today is greater, 1 if other day is greater and 0 if there both are equals
-def compareTodayWith(day):
-    today = datetime.strptime(getTodayDate(), '%d/%m/%Y')
+def compareDateWith(day,today = None):
+    if(not today):
+        today = datetime.strptime(getTodayDate(), '%d/%m/%Y')
     day = datetime.strptime(day, '%d/%m/%Y')
     if today>day:
         return 1
@@ -68,7 +69,7 @@ def getSecondsFromMeghrebToSobuh(sobuh_azan_time):
 
 # Here, we called is ramadan tomorrow, because when next day is ramadan we need to wait 
 # to time before imsak
-def isRamadan():
+def isRamadan(date):
     start_of_ramadan = "01/03/2025"
     end_of_ramadan = "30/03/2025"
-    return compareTodayWith(start_of_ramadan)!=-1 and compareTodayWith(end_of_ramadan)!=1
+    return compareDateWith(start_of_ramadan,today=date)!=-1 and compareDateWith(end_of_ramadan,today=date)!=1
