@@ -28,6 +28,7 @@ def mainProgram():
         last_azan = general.getLastAzanTime()
         print(last_azan)
         if last_azan is None:
+            #TODO: Remove display = None and put display = display
             general.showTimes(display=None,quran_time=None,azan_time=None,is_sobuh_now=False,is_error=True)
             return None
         random_number = general.getRandomNumberFromFile()
@@ -40,6 +41,7 @@ def mainProgram():
         print(f'azan_time is {azan_time}')
 
         #show times
+        #TODO: Remove display = None and put display = display 
         general.showTimes(display=None,quran_time=quran_time,azan_time=azan_time,is_sobuh_now=is_sobuh_now,is_error=False)
         
         # Time is the same as quran time
