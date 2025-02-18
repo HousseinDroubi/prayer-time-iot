@@ -83,7 +83,6 @@ def getLastAzanTime():
 		today_times = all_times[0]
 		# If today is greater than first day in json
 		if date_time.compareDateWith(today_times.get("date"))==1:
-			print("Removing today")
 			fs.removeFirstDay(all_times)
 		# If today is the same as first day in json
 		elif date_time.compareDateWith(today_times.get("date"))==0:
