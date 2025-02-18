@@ -65,3 +65,10 @@ def getSecondsFromMeghrebToSobuh(sobuh_azan_time):
     time_difference = given_time - current_time
     seconds_difference = time_difference.total_seconds()
     return seconds_difference
+
+# Here, we called is ramadan tomorrow, because when next day is ramadan we need to wait 
+# to time before imsak
+def isRamadan():
+    start_of_ramadan = "01/03/2025"
+    end_of_ramadan = "30/03/2025"
+    return compareTodayWith(start_of_ramadan)!=-1 and compareTodayWith(end_of_ramadan)!=1
