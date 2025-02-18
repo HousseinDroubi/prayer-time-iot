@@ -55,7 +55,7 @@ def showTimes(display,quran_time,azan_time,is_sobuh_now=False,is_error = False):
 		print(f"Quran at: {quran_time}")
 		# display.lcd_display_string(f"Quran at: {quran_time}", 1)
 	# display.lcd_display_string(f" Azan at: {azan_time} ", 2)
-	print(" Azan at: {azan_time} ")
+	print(f" Azan at: {azan_time} ")
 
 # get random number
 def generateRandomNumber(start,end):
@@ -82,11 +82,11 @@ def getLastAzanTime():
 			return None
 		today_times = all_times[0]
 		# If today is greater than first day in json
-		if date_time.compareTodayWith(today_times.get("date"))==1:
+		if date_time.compareDateWith(today_times.get("date"))==1:
 			print("Removing today")
 			fs.removeFirstDay(all_times)
 		# If today is the same as first day in json
-		elif date_time.compareTodayWith(today_times.get("date"))==0:
+		elif date_time.compareDateWith(today_times.get("date"))==0:
 			# If current time is the same as sobuh or less than it
 			if date_time.compareCurrentTimeWith(today_times.get("sobuh"))!=1:
 				return {"azan_time":today_times.get("sobuh"),"is_sobuh":True}
