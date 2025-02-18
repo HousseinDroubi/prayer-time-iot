@@ -47,18 +47,17 @@ def getSoundDuration(random_number):
 	audio_info = mediainfo(file_path)
 	return math.ceil(float(audio_info['duration'])) + 10
 
+
 # Play azan
 def playAzan(is_sobuh_now=False):
 	random_number_for_azan = general.generateRandomNumber(1,3)
-	sound = AudioSegment.from_file(f"./azan/azan_{random_number_for_azan}.mp3")
-	if is_sobuh_now:
-		sound = sound - 3
-	play(sound)
+	file_path = f"./azan/azan_{random_number_for_azan}.mp3"
+	playFile(file_path=file_path,is_sobuh_now=is_sobuh_now)
 
 # Play quran
-def playQuran(random_number):
-	sound = AudioSegment.from_file(f"./quran/quran_{random_number}.mp3")
-	play(sound)
+def playQuran(random_number,is_sobuh_now=False):
+	file_path = f"./quran/quran_{random_number}.mp3"
+	playFile(file_path=file_path,is_sobuh_now=is_sobuh_now)
 	
 # Play sound
 def playSound(random_number,is_adan_and_quran=False,azan_time=None,is_sobuh_now=False):
@@ -67,8 +66,14 @@ def playSound(random_number,is_adan_and_quran=False,azan_time=None,is_sobuh_now=
 	if not is_adan_and_quran:
 		playAzan(is_sobuh_now=is_sobuh_now)
 	else:
-		playQuran(random_number=random_number)
+		playQuran(random_number=random_number,is_sobuh_now = is_sobuh_now)
 		dt.waitUntil(azan_time)
 		playAzan(is_sobuh_now=is_sobuh_now)
 	time.sleep(1)
 	general.turnIzaa(is_from_mic=False,is_to_on=False)
+
+def playFile(file_path,is_sobuh_now=False):
+	sound = AudioSegment.from_file(file_path)
+	if is_sobuh_now:
+		sound = sound - 3
+	play(sound)
