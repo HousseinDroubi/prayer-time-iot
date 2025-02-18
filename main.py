@@ -29,14 +29,15 @@ def mainProgram():
         print(last_azan)
         if last_azan is None:
             #TODO: Remove display = None and put display = display
-            general.showTimes(display=None,quran_time=None,azan_time=None,is_sobuh_now=False,is_error=True)
+            general.showTimes(display=None,quran_time=None,azan_time=None,imsak_time=None,is_sobuh_now=False,is_ramadan=False,is_error=True)
             return None
         is_sobuh_now = last_azan.get("is_sobuh")
         azan_time=last_azan.get("azan_time")
 
         if(date_time.isRamadan(last_azan.get("date")) and last_azan.get("is_sobuh")):
-            # TODO
-            print("IT's Ramadan")
+            # TODO: remove display = None and put display = display 
+            general.showTimes(display=None,quran_time=None,azan_time=azan_time,imsak_time=last_azan.get("ten_minutes_before_imsak"),is_sobuh_now=None,is_ramadan=True,is_error=False)
+
         random_number = general.getRandomNumberFromFile()
         quran_time = general.getQuranTime(random_number,azan_time)
 
@@ -46,7 +47,7 @@ def mainProgram():
 
         #show times
         #TODO: Remove display = None and put display = display 
-        general.showTimes(display=None,quran_time=quran_time,azan_time=azan_time,is_sobuh_now=is_sobuh_now,is_error=False)
+        general.showTimes(display=None,quran_time=quran_time,azan_time=azan_time,imsak_time=None,is_sobuh_now=is_sobuh_now,is_ramadan=False,is_error=False)
         
         # Time is the same as quran time
         if date_time.compareCurrentTimeWith(quran_time) == 0:

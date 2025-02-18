@@ -42,13 +42,16 @@ def turnIzaa(is_from_mic=True,is_to_on=True):
 			print("Turn off Izaa from mic program")
 			# GPIO.output(36,GPIO.LOW) # Close relay from mic program
 
-def showTimes(display,quran_time,azan_time,is_sobuh_now=False,is_error = False):
+def showTimes(display,quran_time,azan_time,imsak_time,is_sobuh_now=False,is_ramadan = False,is_error = False):
 	if is_error:
 		print("Showing Something went wrong")
 		# display.lcd_display_string(" Something went ",1)
 		# display.lcd_display_string("      wrong     ",2)
 		return
-	if is_sobuh_now:
+	if is_ramadan :
+		print(f"Imsak at: {imsak_time}")
+		# display.lcd_display_string(f"Imsak at: {imsak_time}", 1)
+	elif is_sobuh_now:
 		print("----------------------")
 		# display.lcd_display_string(f" -------------- ", 1)
 	else:	
