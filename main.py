@@ -31,9 +31,12 @@ def mainProgram():
             #TODO: Remove display = None and put display = display
             general.showTimes(display=None,quran_time=None,azan_time=None,is_sobuh_now=False,is_error=True)
             return None
+        is_sobuh_now = last_azan.get("is_sobuh")
+        if(date_time.isRamadan(last_azan.get("date")) and last_azan.get("is_sobuh")):
+            # TODO
+            print("IT's Ramadan")
         random_number = general.getRandomNumberFromFile()
         azan_time=last_azan.get("azan_time")
-        is_sobuh_now = last_azan.get("is_sobuh")
         quran_time = general.getQuranTime(random_number,azan_time)
 
         print(f"quran_time is {quran_time}")
