@@ -26,7 +26,6 @@ time.sleep(3)
 def mainProgram():
     while True:
         last_azan = general.getLastAzanTime()
-        print(last_azan)
         if last_azan is None:
             #TODO: Remove display = None and put display = display
             general.showTimes(display=None,quran_time=None,azan_time=None,imsak_time=None,is_sobuh_now=False,is_ramadan=False,is_error=True)
@@ -37,7 +36,19 @@ def mainProgram():
         if(date_time.isRamadan(last_azan.get("date")) and last_azan.get("is_sobuh")):
             # TODO: remove display = None and put display = display 
             general.showTimes(display=None,quran_time=None,azan_time=azan_time,imsak_time=last_azan.get("ten_minutes_before_imsak"),is_sobuh_now=None,is_ramadan=True,is_error=False)
-
+            # Get the appropriate random number
+            while True:
+                random_number = general.generateRandomNumber(1,19)
+                sound_duration = file_system.getSoundDuration(random_number) // 60
+                # Accept quran duration if they are between 7 and 8
+                if(sound_duration>=7 and sound_duration<=8):
+                    break
+            # Get quran time with taking into consideration the random number
+            quran_time = general.getQuranTime(random_number,azan_time)
+            
+            # It's Quran time
+            # TODO: Start comparing 
+                
         random_number = general.getRandomNumberFromFile()
         quran_time = general.getQuranTime(random_number,azan_time)
 
