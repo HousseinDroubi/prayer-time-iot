@@ -6,28 +6,29 @@ import packages.general as general
 import packages.file_system as file_system
 import packages.date_time as date_time
 import time
-import drivers
+# import drivers
 import threading
-import RPi.GPIO as GPIO
+# import RPi.GPIO as GPIO
 
-GPIO.setmode(GPIO.BOARD)
-GPIO.setwarnings(False)
-GPIO.setup(36,GPIO.OUT)
-GPIO.setup(37,GPIO.OUT)
-GPIO.setup(16,GPIO.OUT) # This is for mic led
-GPIO.setup(18,GPIO.IN,pull_up_down=GPIO.PUD_UP) # This is for reading switch
-GPIO.output(16,GPIO.LOW)
-GPIO.output(36,GPIO.LOW)
-GPIO.output(37,GPIO.LOW)
-display = drivers.Lcd()
+# GPIO.setmode(GPIO.BOARD)
+# GPIO.setwarnings(False)
+# GPIO.setup(36,GPIO.OUT)
+# GPIO.setup(37,GPIO.OUT)
+# GPIO.setup(16,GPIO.OUT) # This is for mic led
+# GPIO.setup(18,GPIO.IN,pull_up_down=GPIO.PUD_UP) # This is for reading switch
+# GPIO.output(16,GPIO.LOW)
+# GPIO.output(36,GPIO.LOW)
+# GPIO.output(37,GPIO.LOW)
+# display = drivers.Lcd()
 
 time.sleep(3)
 
 def mainProgram():
     while True:
         last_azan = general.getLastAzanTime()
+        print(last_azan)
         if last_azan is None:
-            general.showTimes(display=display,quran_time=None,azan_time=None,is_sobuh_now=False,is_error=True)
+            general.showTimes(display=None,quran_time=None,azan_time=None,is_sobuh_now=False,is_error=True)
             return None
         random_number = general.getRandomNumberFromFile()
         azan_time=last_azan.get("azan_time")
@@ -39,7 +40,7 @@ def mainProgram():
         print(f'azan_time is {azan_time}')
 
         #show times
-        general.showTimes(display=display,quran_time=quran_time,azan_time=azan_time,is_sobuh_now=is_sobuh_now,is_error=False)
+        general.showTimes(display=None,quran_time=quran_time,azan_time=azan_time,is_sobuh_now=is_sobuh_now,is_error=False)
         
         # Time is the same as quran time
         if date_time.compareCurrentTimeWith(quran_time) == 0:
