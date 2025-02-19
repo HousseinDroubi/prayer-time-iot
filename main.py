@@ -38,7 +38,7 @@ def mainProgram():
             general.showTimes(display=None,quran_time=None,azan_time=azan_time,imsak_time=last_azan.get("ten_minutes_before_imsak"),is_sobuh_now=None,is_ramadan=True,is_error=False)
             # Get the appropriate random number
             while True:
-                random_number = general.getRandomNumberFromFile(1,19)
+                random_number = general.getRandomNumberFromFile()
                 sound_duration = file_system.getQuranSoundDuration(random_number) // 60
                 # Accept quran duration if it's equal to 7 or 8
                 if(sound_duration==7 or sound_duration==8):
