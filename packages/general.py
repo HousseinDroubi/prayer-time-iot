@@ -42,6 +42,7 @@ def turnIzaa(is_from_mic=True,is_to_on=True):
 			print("Turn off Izaa from mic program")
 			# GPIO.output(36,GPIO.LOW) # Close relay from mic program
 
+# The below function is to show data on LCD
 def showTimes(display,quran_time,azan_time,imsak_time,is_sobuh_now=False,is_ramadan = False,is_error = False):
 	if is_error:
 		print("Showing Something went wrong")
@@ -69,9 +70,11 @@ def generateRandomNumber(start,end):
 def convertDictionaryToString(dictionary):
 	return json.dumps(dictionary,indent=2)
 
+# The below function is to convert integer to string
 def convertIntegerToString(number):
 	return str(number)
 
+# The below function is to convert integer to string
 def getRandomNumberFromFile():
 	random_number = generateRandomNumber(1,19)
 	return convertIntegerToString(random_number)
