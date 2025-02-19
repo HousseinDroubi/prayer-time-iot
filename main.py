@@ -34,8 +34,12 @@ def mainProgram():
         azan_time=last_azan.get("azan_time")
 
         if(date_time.isRamadan(last_azan.get("date")) and last_azan.get("is_sobuh")):
+            imsak_time = last_azan.get("imsak")
+            ten_minutes_before_imsak = last_azan.get("ten_minutes_before_imsak")
+            twelve_minutes_before_imsak = date_time.removeSecondsFromTime(120,ten_minutes_before_imsak)
+
             # TODO: remove display = None and put display = display 
-            general.showTimes(display=None,quran_time=None,azan_time=azan_time,imsak_time=last_azan.get("ten_minutes_before_imsak"),is_sobuh_now=None,is_ramadan=True,is_error=False)
+            general.showTimes(display=None,quran_time=None,azan_time=azan_time,imsak_time=imsak_time,is_sobuh_now=None,is_ramadan=True,is_error=False)
             # Get the appropriate random number
             while True:
                 random_number = general.getRandomNumberFromFile()
