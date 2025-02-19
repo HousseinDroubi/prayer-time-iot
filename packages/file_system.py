@@ -63,13 +63,11 @@ def playQuran(random_number,is_sobuh_now=False):
 # Play sound
 def playSound(random_number,is_adan_and_quran=False,azan_time=None,is_sobuh_now=False):
 	general.turnIzaa(is_from_mic=False)
-	time.sleep(5)
-	if not is_adan_and_quran:
-		playAzan(is_sobuh_now=is_sobuh_now)
-	else:
+	time.sleep(1)
+	if is_adan_and_quran:
 		playQuran(random_number=random_number,is_sobuh_now = is_sobuh_now)
 		dt.waitUntil(azan_time)
-		playAzan(is_sobuh_now=is_sobuh_now)
+	playAzan(is_sobuh_now=is_sobuh_now)
 	time.sleep(1)
 	general.turnIzaa(is_from_mic=False,is_to_on=False)
 
