@@ -42,7 +42,7 @@ def readAllDataFromFile(path):
 	return data
 
 # Get sound duration
-def getSoundDuration(random_number):
+def getQuranSoundDuration(random_number):
 	file_path = f'./quran/quran_{random_number}.mp3'
 	audio_info = mediainfo(file_path)
 	return math.ceil(float(audio_info['duration'])) + 10

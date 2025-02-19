@@ -118,6 +118,6 @@ def getLastAzanTime():
 			return None
 		
 def getQuranTime(random_number,azan_time):
-	duration = fs.getSoundDuration(random_number)
+	duration = fs.getQuranSoundDuration(random_number)
 	quran_time = date_time.removeSecondsFromTime(duration,azan_time)
 	return quran_time

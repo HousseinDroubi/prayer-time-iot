@@ -39,7 +39,7 @@ def mainProgram():
             # Get the appropriate random number
             while True:
                 random_number = general.generateRandomNumber(1,19)
-                sound_duration = file_system.getSoundDuration(random_number) // 60
+                sound_duration = file_system.getQuranSoundDuration(random_number) // 60
                 # Accept quran duration if they are between 7 and 8
                 if(sound_duration>=7 and sound_duration<=8):
                     break
