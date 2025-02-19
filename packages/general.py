@@ -29,18 +29,18 @@ def turnIzaa(is_from_mic=True,is_to_on=True):
 	time.sleep(0.3)
 	if is_from_mic:
 		if is_to_on:
-			print("Turn on Izaa from main program")
-			# GPIO.output(37,GPIO.HIGH) # Open relay from main program
-		else:
-			print("Turn off Izaa from main program")
-			# GPIO.output(37,GPIO.LOW)# Close relay from main program
-	else:
-		if is_to_on:
 			print("Turn on Izaa from mic program")
-			# GPIO.output(36,GPIO.HIGH) # Open relay from mic program
+			# GPIO.output(37,GPIO.HIGH) # Open relay from mic program
 		else:
 			print("Turn off Izaa from mic program")
-			# GPIO.output(36,GPIO.LOW) # Close relay from mic program
+			# GPIO.output(37,GPIO.LOW)# Close relay from mic program
+	else:
+		if is_to_on:
+			print("Turn on Izaa from main program")
+			# GPIO.output(36,GPIO.HIGH) # Open relay from main program
+		else:
+			print("Turn off Izaa from main program")
+			# GPIO.output(36,GPIO.LOW) # Close relay from main program
 
 # The below function is to show data on LCD
 def showTimes(display,quran_time,azan_time,imsak_time,is_sobuh_now=False,is_ramadan = False,is_error = False):
