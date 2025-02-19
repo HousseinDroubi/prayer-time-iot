@@ -61,13 +61,16 @@ def playQuran(random_number,is_sobuh_now=False):
 	playFile(file_path=file_path,is_sobuh_now=is_sobuh_now)
 	
 # Play sound
-def playSound(random_number,is_adan_and_quran=False,azan_time=None,is_sobuh_now=False):
+def playSound(random_number,is_adan_and_quran=False,azan_time=None,is_sobuh_now=False,ramadan=None):
 	general.turnIzaa(is_from_mic=False)
 	time.sleep(1)
-	if is_adan_and_quran:
-		playQuran(random_number=random_number,is_sobuh_now = is_sobuh_now)
-		dt.waitUntil(azan_time)
-	playAzan(is_sobuh_now=is_sobuh_now)
+	if ramadan:
+		print("It's ramadan")
+	else:
+		if is_adan_and_quran:
+			playQuran(random_number=random_number,is_sobuh_now = is_sobuh_now)
+			dt.waitUntil(azan_time)
+		playAzan(is_sobuh_now=is_sobuh_now)
 	time.sleep(1)
 	general.turnIzaa(is_from_mic=False,is_to_on=False)
 
