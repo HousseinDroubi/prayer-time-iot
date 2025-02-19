@@ -40,8 +40,8 @@ def mainProgram():
             while True:
                 random_number = general.generateRandomNumber(1,19)
                 sound_duration = file_system.getQuranSoundDuration(random_number) // 60
-                # Accept quran duration if they are between 7 and 8
-                if(sound_duration>=7 and sound_duration<=8):
+                # Accept quran duration if it's equal to 7 or 8
+                if(sound_duration==7 or sound_duration==8):
                     break
             # Get quran time with taking into consideration the random number
             quran_time = general.getQuranTime(random_number,azan_time)
