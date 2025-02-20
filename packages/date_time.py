@@ -76,12 +76,12 @@ def getSecondsStartingBeforeMidnightTo(goal_time):
 # Here, we called is ramadan tomorrow, because when next day is ramadan we need to wait 
 # to time before imsak
 def isRamadan(date):
-    start_of_ramadan = "01/02/2025"
+    start_of_ramadan = "01/03/2025"
     end_of_ramadan = "30/03/2025"
     return compareDateWith(start_of_ramadan,today=date)!=-1 and compareDateWith(end_of_ramadan,today=date)!=1
 
 def isSummerTime():
-    start_of_summer_time = "01/02/2025"
+    start_of_summer_time = "30/03/2025"
     end_of_summer_time = "25/10/2025"
 
     return compareDateWith(start_of_summer_time)!=-1 and compareDateWith(end_of_summer_time)!=1
