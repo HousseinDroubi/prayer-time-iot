@@ -69,6 +69,8 @@ def getSecondsFromMeghrebToSobuh(sobuh_azan_time):
         given_time += timedelta(days=1)
     time_difference = given_time - current_time
     seconds_difference = time_difference.total_seconds()
+    if isSummerTime():
+        seconds_difference = seconds_difference +  3600
     return seconds_difference
 
 # Here, we called is ramadan tomorrow, because when next day is ramadan we need to wait 
