@@ -53,6 +53,8 @@ def removeSecondsFromTime(seconds,time):
 def waitUntil(wait_until_time):
     now = datetime.now()
     target_time = datetime.strptime(wait_until_time,"%H:%M").replace(year=now.year, month=now.month, day=now.day)
+    if isSummerTime():
+        target_time = target_time + timedelta(hours=1)
     time_diff = (target_time - now).total_seconds()
     if(time_diff<0):
         return
@@ -75,3 +77,9 @@ def isRamadan(date):
     start_of_ramadan = "01/02/2025"
     end_of_ramadan = "30/03/2025"
     return compareDateWith(start_of_ramadan,today=date)!=-1 and compareDateWith(end_of_ramadan,today=date)!=1
+
+def isSummerTime():
+    start_of_summer_time = "01/02/2025"
+    end_of_summer_time = "25/10/2025"
+
+    return compareDateWith(start_of_summer_time)!=-1 and compareDateWith(end_of_summer_time)!=1
