@@ -44,7 +44,7 @@ def mainProgram():
             while True:
                 random_number = general.getRandomNumberFromFile()
                 sound_duration = file_system.getQuranSoundDuration(random_number) // 60
-                # Accept quran duration if it's equal to 7 or 8
+                # Accept quran duration if it's equal to 7
                 if sound_duration:
                     break
             # Get quran time with taking into consideration the random number
@@ -52,7 +52,7 @@ def mainProgram():
             
             if date_time.getNumberOfDaysBetweenTwoDates(date_1=date_time.getTodayDate(),date_2=last_azan.get("date")) == 1 or date_time.compareCurrentTimeWith(twelve_minutes_before_imsak) != 1:
                 # If time is not the same as 12 min before imsak, then wait until 12 min before imsak
-                if(date_time.compareCurrentTimeWith(twelve_minutes_before_imsak) == -1) or date_time.getNumberOfDaysBetweenTwoDates(date_1=date_time.getTodayDate(),date_2=last_azan.get("date")) == 1:
+                if date_time.compareCurrentTimeWith(twelve_minutes_before_imsak) == -1 or date_time.getNumberOfDaysBetweenTwoDates(date_1=date_time.getTodayDate(),date_2=last_azan.get("date")) == 1:
                     date_time.waitUntil(twelve_minutes_before_imsak)
                 file_system.playSound(random_number=random_number,is_adan_and_quran=None,
                     azan_time=None,is_sobuh_now=None,
@@ -127,41 +127,33 @@ def mainProgram():
         #TODO: Remove display = None and put display = display 
         general.showTimes(display=None,quran_time=quran_time,azan_time=azan_time,imsak_time=None,is_sobuh_now=is_sobuh_now,is_ramadan=False,is_error=False)
         
-        # Time is the same as quran time
-        if date_time.compareCurrentTimeWith(quran_time) == 0:
+        # Time is either at quran time or before it
+        if date_time.compareCurrentTimeWith(quran_time) != 1:
             # Dohur or meghreb times
             if not is_sobuh_now:
+                if date_time.compareCurrentTimeWith(quran_time) == -1:
+                    date_time.waitUntil(quran_time)
                 file_system.playSound(random_number=random_number,is_adan_and_quran=True,azan_time=azan_time,is_sobuh_now=is_sobuh_now)
             # Sobuh time
             else:
                 date_time.waitUntil(azan_time)
                 file_system.playSound(random_number=None,is_adan_and_quran=False,azan_time=None,is_sobuh_now=is_sobuh_now)
-        # Time is before quran time
-        elif date_time.compareCurrentTimeWith(quran_time)==-1:
-            # Dohur or meghreb times
-            if not is_sobuh_now:
-                date_time.waitUntil(quran_time)
-                file_system.playSound(random_number=random_number,is_adan_and_quran=True,azan_time=azan_time,is_sobuh_now=is_sobuh_now)
-            # Sobuh time
-            else:
-                date_time.waitUntil(azan_time)
-                file_system.playSound(random_number=None,is_adan_and_quran=False,azan_time=None,is_sobuh_now=is_sobuh_now)
-        # Time is after quran time
-        else:
-            # Time is after quran time and the same as azan time
-            if date_time.compareCurrentTimeWith(azan_time)==0:
-                file_system.playSound(random_number=None,is_adan_and_quran=False,azan_time=None,is_sobuh_now=is_sobuh_now)#Only Azan
+
+        # Time is either at azan time or before it
+        elif date_time.compareCurrentTimeWith(azan_time)!=1:
+
             # Time is after quran time and before azan time
-            elif date_time.compareCurrentTimeWith(azan_time)==-1:
+            if date_time.compareCurrentTimeWith(azan_time)==-1:
                 date_time.waitUntil(azan_time)
-                file_system.playSound(random_number=None,is_adan_and_quran=False,azan_time=None,is_sobuh_now=is_sobuh_now)#Only Azan
-            # Time is after quran time and after azan time whcih is after meghreb time
-            else:
-                time_to_wait = date_time.getSecondsFromMeghrebToSobuh(sobuh_azan_time=azan_time)
-                print(f"Waiting {time_to_wait//3600} hours or {time_to_wait//60} minutes or {time_to_wait}")
-                time.sleep(time_to_wait)
-                file_system.playSound(random_number=None,is_adan_and_quran=False,azan_time=None,is_sobuh_now=True)#Only Azan
-            time.sleep(1)
+            file_system.playSound(random_number=None,is_adan_and_quran=False,azan_time=None,is_sobuh_now=is_sobuh_now)#Only Azan
+
+        # Time is after quran time and after azan time which is after meghreb time
+        else:
+            time_to_wait = date_time.getSecondsFromMeghrebToSobuh(sobuh_azan_time=azan_time)
+            print(f"Waiting {time_to_wait//3600} hours or {time_to_wait//60} minutes or {time_to_wait}")
+            time.sleep(time_to_wait)
+            file_system.playSound(random_number=None,is_adan_and_quran=False,azan_time=None,is_sobuh_now=True)#Only Azan
+        time.sleep(1)
 
 def micProgram():
     while True:
