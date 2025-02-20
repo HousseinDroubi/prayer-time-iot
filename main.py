@@ -32,6 +32,7 @@ def mainProgram():
             return None
         is_sobuh_now = last_azan.get("is_sobuh")
         azan_time=last_azan.get("azan_time")
+        quran_time = general.getQuranTime(random_number,azan_time)
 
         if(date_time.isRamadan(last_azan.get("date")) and last_azan.get("is_sobuh")):
             imsak_time = last_azan.get("imsak")
@@ -48,7 +49,6 @@ def mainProgram():
                 if sound_duration == 7:
                     break
             # Get quran time with taking into consideration the random number
-            quran_time = general.getQuranTime(random_number,azan_time)
             
             if date_time.getNumberOfDaysBetweenTwoDates(date_1=date_time.getTodayDate(),date_2=last_azan.get("date")) == 1 or date_time.compareCurrentTimeWith(twelve_minutes_before_imsak) != 1:
                 # If time is not the same as 12 min before imsak, then wait until 12 min before imsak
@@ -67,7 +67,6 @@ def mainProgram():
                         "imsak_sound_before_imsak_time":True,
                         "imsak_time":imsak_time,
                         "voice_before_quran_time":True,
-                        "quran_time":quran_time,
                         "azan_time":azan_time
                     })
 
@@ -85,7 +84,6 @@ def mainProgram():
                         "imsak_sound_before_imsak_time":True,
                         "imsak_time":imsak_time,
                         "voice_before_quran_time":True,
-                        "quran_time":quran_time,
                         "azan_time":azan_time
                     })
             # This time is after 10 minutes before imsak
@@ -102,7 +100,6 @@ def mainProgram():
                         "imsak_sound_before_imsak_time":False,
                         "imsak_time":None,
                         "voice_before_quran_time":True,
-                        "quran_time":quran_time,
                         "azan_time":azan_time
                     })
             # Check if time is after imsak time
@@ -122,7 +119,6 @@ def mainProgram():
                 file_system.playSound(random_number=None,is_adan_and_quran=False,azan_time=None,is_sobuh_now=True,ramadan=None)
             continue
         random_number = general.getRandomNumberFromFile()
-        quran_time = general.getQuranTime(random_number,azan_time)
 
         print(f"quran_time is {quran_time}")
         print(f"random_number is {random_number}")
