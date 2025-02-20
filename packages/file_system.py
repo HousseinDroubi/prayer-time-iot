@@ -46,7 +46,6 @@ def getQuranSoundDuration(random_number):
 	audio_info = mediainfo(file_path)
 	return math.ceil(float(audio_info['duration'])) + 10
 
-
 # Play azan, here we need a random number for azan when function called then call playFile
 def playAzan(is_sobuh_now=False):
 	random_number_for_azan = general.generateRandomNumber(1,3)
