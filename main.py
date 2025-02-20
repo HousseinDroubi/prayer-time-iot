@@ -50,10 +50,9 @@ def mainProgram():
             # Get quran time with taking into consideration the random number
             quran_time = general.getQuranTime(random_number,azan_time)
             
-            # Check if time is before or equal 12 minutes before imsak
-            if date_time.compareCurrentTimeWith(twelve_minutes_before_imsak) != 1:
+            if date_time.getNumberOfDaysBetweenTwoDates(date_1=date_time.getTodayDate(),date_2=last_azan.get("date")) == 1 or date_time.compareCurrentTimeWith(twelve_minutes_before_imsak) != 1:
                 # If time is not the same as 12 min before imsak, then wait until 12 min before imsak
-                if(date_time.compareCurrentTimeWith(twelve_minutes_before_imsak) == -1):
+                if(date_time.compareCurrentTimeWith(twelve_minutes_before_imsak) == -1) or date_time.getNumberOfDaysBetweenTwoDates(date_1=date_time.getTodayDate(),date_2=last_azan.get("date")) == 1:
                     date_time.waitUntil(twelve_minutes_before_imsak)
                 file_system.playSound(random_number=random_number,is_adan_and_quran=None,
                     azan_time=None,is_sobuh_now=None,
