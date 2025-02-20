@@ -12,7 +12,6 @@ import packages.date_time as dt
 TIMES_FILE_PATH = "times.json"
 
 # remove first day from times file
-
 def removeFirstDay(all_times):
 	all_times.pop(0)
 	all_times = general.convertDictionaryToString(all_times)
@@ -81,12 +80,6 @@ def playSound(random_number,is_adan_and_quran=False,azan_time=None,is_sobuh_now=
 			file_path = f"./ramadan/voices/before_quran/voice.mp3"
 			playFile(file_path=file_path,is_sobuh_now=True)
 			dt.waitUntil(ramadan.get("quran_time"))
-
-		if random_number:
-			playQuran(random_number=random_number,is_sobuh_now=True)
-			dt.waitUntil(ramadan.get("azan_time"))
-		playAzan(is_sobuh_now=True)
-
 	else:
 		if is_adan_and_quran:
 			playQuran(random_number=random_number,is_sobuh_now = is_sobuh_now)

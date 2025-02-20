@@ -106,35 +106,15 @@ def mainProgram():
                 # If time is not the same as quran time, then wait until quran time
                 if date_time.compareCurrentTimeWith(quran_time)==-1:
                     date_time.waitUntil(quran_time)
-                file_system.playSound(random_number=random_number,is_adan_and_quran=None,
-                azan_time=None,is_sobuh_now=None,
-                ramadan={
-                    "voice_before_twelve_min_from_imsak_time":False,
-                    "ten_minutes_before_imsak_time":None,
-                    "imsak_sound_before_imsak_time":False,
-                    "imsak_time":None,
-                    "voice_before_quran_time":False,
-                    "quran_time":None,
-                    "azan_time":azan_time
-                })
+                file_system.playSound(random_number=random_number,is_adan_and_quran=True,azan_time=None,is_sobuh_now=True,ramadan=None)
+
             # Check if time is after quran time
             else:
                 # Check if time is before or equal azan time
                 if date_time.compareCurrentTimeWith(azan_time)==-1:
                     date_time.waitUntil(azan_time)
                 # If time is not the same as azan time, then wait until azan time
-                file_system.playSound(random_number=None,is_adan_and_quran=None,
-                azan_time=None,is_sobuh_now=None,
-                ramadan={
-                    "voice_before_twelve_min_from_imsak_time":False,
-                    "ten_minutes_before_imsak_time":None,
-                    "imsak_sound_before_imsak_time":False,
-                    "imsak_time":None,
-                    "voice_before_quran_time":False,
-                    "quran_time":None,
-                    "random_number":None,
-                    "azan_time":None
-                })
+                file_system.playSound(random_number=None,is_adan_and_quran=False,azan_time=None,is_sobuh_now=True,ramadan=None)
             continue
         random_number = general.getRandomNumberFromFile()
         quran_time = general.getQuranTime(random_number,azan_time)
