@@ -55,7 +55,7 @@ def mainProgram():
                 # If time is not the same as 12 min before imsak, then wait until 12 min before imsak
                 if(date_time.compareCurrentTimeWith(twelve_minutes_before_imsak) == -1):
                     date_time.waitUntil(twelve_minutes_before_imsak)
-                file_system.playSound(random_number=None,is_adan_and_quran=None,
+                file_system.playSound(random_number=random_number,is_adan_and_quran=None,
                     azan_time=None,is_sobuh_now=None,
                     ramadan={
                         "voice_before_twelve_min_from_imsak_time":True,
@@ -64,7 +64,6 @@ def mainProgram():
                         "imsak_time":imsak_time,
                         "voice_before_quran_time":True,
                         "quran_time":quran_time,
-                        "random_number":random_number,
                         "azan_time":azan_time
                     })
             # This time is after 12 minutes before imsak
@@ -74,7 +73,7 @@ def mainProgram():
                     # If time is not the same as 10 min before imsak, then wait until 10 min before imsak
                     if(date_time.compareCurrentTimeWith(ten_minutes_before_imsak) == -1):
                         date_time.waitUntil(ten_minutes_before_imsak)
-                    file_system.playSound(random_number=None,is_adan_and_quran=None,
+                    file_system.playSound(random_number=random_number,is_adan_and_quran=None,
                         azan_time=None,is_sobuh_now=None,
                         ramadan={
                             "voice_before_twelve_min_from_imsak_time":False,
@@ -83,7 +82,6 @@ def mainProgram():
                             "imsak_time":imsak_time,
                             "voice_before_quran_time":True,
                             "quran_time":quran_time,
-                            "random_number":random_number,
                             "azan_time":azan_time
                         })
                 # This time is after 10 minutes before imsak
@@ -93,7 +91,7 @@ def mainProgram():
                         # If time is not the same as imsak time, then wait until imsak time
                         if date_time.compareCurrentTimeWith(imsak_time)==-1:
                             date_time.waitUntil(imsak_time)
-                        file_system.playSound(random_number=None,is_adan_and_quran=None,
+                        file_system.playSound(random_number=random_number,is_adan_and_quran=None,
                             azan_time=None,is_sobuh_now=None,
                             ramadan={
                                 "voice_before_twelve_min_from_imsak_time":False,
@@ -102,7 +100,6 @@ def mainProgram():
                                 "imsak_time":None,
                                 "voice_before_quran_time":True,
                                 "quran_time":quran_time,
-                                "random_number":random_number,
                                 "azan_time":azan_time
                             })
                     # Check if time is after imsak time
@@ -112,7 +109,7 @@ def mainProgram():
                             # If time is not the same as quran time, then wait until quran time
                             if date_time.compareCurrentTimeWith(quran_time)==-1:
                                 date_time.waitUntil(quran_time)
-                            file_system.playSound(random_number=None,is_adan_and_quran=None,
+                            file_system.playSound(random_number=random_number,is_adan_and_quran=None,
                             azan_time=None,is_sobuh_now=None,
                             ramadan={
                                 "voice_before_twelve_min_from_imsak_time":False,
@@ -121,7 +118,6 @@ def mainProgram():
                                 "imsak_time":None,
                                 "voice_before_quran_time":False,
                                 "quran_time":None,
-                                "random_number":random_number,
                                 "azan_time":azan_time
                             })
                         # Check if time is after quran time
