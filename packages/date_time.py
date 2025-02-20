@@ -61,9 +61,9 @@ def waitUntil(wait_until_time):
     print(f"Waiting {time_diff//3600} hours or {time_diff//60} minutes or {time_diff}")
     time.sleep(time_diff)
 
-def getSecondsFromMeghrebToSobuh(sobuh_azan_time):
+def getSecondsStartingBeforeMidnightTo(goal_time):
     current_time = datetime.now()
-    given_time = datetime.strptime(sobuh_azan_time, "%H:%M")
+    given_time = datetime.strptime(goal_time, "%H:%M")
     given_time = given_time.replace(year=current_time.year, month=current_time.month, day=current_time.day)
     if given_time <= current_time:
         given_time += timedelta(days=1)

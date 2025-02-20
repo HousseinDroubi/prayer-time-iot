@@ -55,7 +55,7 @@ def mainProgram():
                 if date_time.compareCurrentTimeWith(twelve_minutes_before_imsak) == -1:
                     date_time.waitUntil(twelve_minutes_before_imsak)
                 elif date_time.getNumberOfDaysBetweenTwoDates(date_1=date_time.getTodayDate(),date_2=last_azan.get("date")) == 1:
-                    time_to_wait = date_time.getSecondsFromMeghrebToSobuh(sobuh_azan_time=twelve_minutes_before_imsak)
+                    time_to_wait = date_time.getSecondsStartingBeforeMidnightTo(goal_time=twelve_minutes_before_imsak)
                     print(f"Waiting {time_to_wait//3600} hours or {time_to_wait//60} minutes or {time_to_wait}")
                     time.sleep(time_to_wait)
                 
@@ -154,7 +154,7 @@ def mainProgram():
 
         # Time is after quran time and after azan time which is after meghreb time
         else:
-            time_to_wait = date_time.getSecondsFromMeghrebToSobuh(sobuh_azan_time=azan_time)
+            time_to_wait = date_time.getSecondsStartingBeforeMidnightTo(goal_time=azan_time)
             print(f"Waiting {time_to_wait//3600} hours or {time_to_wait//60} minutes or {time_to_wait}")
             time.sleep(time_to_wait)
             file_system.playSound(random_number=None,is_adan_and_quran=False,azan_time=None,is_sobuh_now=True)#Only Azan
