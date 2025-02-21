@@ -32,6 +32,7 @@ def mainProgram():
             return None
         is_sobuh_now = last_azan.get("is_sobuh")
         azan_time=last_azan.get("azan_time")
+        random_number = general.getRandomNumberFromFile()
         quran_time = general.getQuranTime(random_number,azan_time)
 
         if(date_time.isRamadan(last_azan.get("date")) and last_azan.get("is_sobuh")):
@@ -118,7 +119,6 @@ def mainProgram():
                 # If time is not the same as azan time, then wait until azan time
                 file_system.playSound(random_number=None,is_adan_and_quran=False,azan_time=None,is_sobuh_now=True,ramadan=None)
             continue
-        random_number = general.getRandomNumberFromFile()
 
         print(f"quran_time is {quran_time}")
         print(f"random_number is {random_number}")
