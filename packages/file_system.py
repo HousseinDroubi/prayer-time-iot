@@ -79,6 +79,10 @@ def playSound(random_number,is_adan_and_quran=False,azan_time=None,is_sobuh_now=
 			file_path = f"./ramadan/voices/before_quran/voice.mp3"
 			playFile(file_path=file_path,is_sobuh_now=True)
 			dt.waitUntil(ramadan.get("quran_time"))
+			playQuran(random_number=random_number,is_sobuh_now=True)
+			dt.waitUntil(ramadan.get("azan_time"))
+			playAzan(is_sobuh_now=True)
+
 	else:
 		if is_adan_and_quran:
 			playQuran(random_number=random_number,is_sobuh_now = is_sobuh_now)
