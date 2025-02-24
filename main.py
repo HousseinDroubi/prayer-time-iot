@@ -14,16 +14,14 @@ import threading
 # GPIO.setwarnings(False)
 # GPIO.setup(36,GPIO.OUT)
 # GPIO.setup(37,GPIO.OUT)
-# GPIO.setup(16,GPIO.OUT) # This is for mic led
 # GPIO.setup(18,GPIO.IN,pull_up_down=GPIO.PUD_UP) # This is for reading switch
-# GPIO.output(16,GPIO.LOW)
 # GPIO.output(36,GPIO.LOW)
 # GPIO.output(37,GPIO.LOW)
 # display = drivers.Lcd()
 
 time.sleep(3)
 
-def mainProgram():
+def main():
     while True:
         last_azan = general.getLastAzanTime()
         if last_azan is None:
@@ -156,22 +154,8 @@ def mainProgram():
             file_system.playSound(random_number=None,is_adan_and_quran=False,azan_time=None,is_sobuh_now=True)#Only Azan
         time.sleep(1)
 
-def micProgram():
-    while True:
-        is_switch_opened = general.scanSwitch()
-        if is_switch_opened:
-            general.turnLED()
-            general.turnIzaa()
-        else:
-            general.turnLED(is_to_on=False)
-            general.turnIzaa(is_to_on=False)
-        time.sleep(0.3)
-
 try:
-    main_thread = threading.Thread(target=mainProgram)
-    mic_thread = threading.Thread(target=micProgram)
-    main_thread.start()
-    mic_thread.start()
+    main()
 except KeyboardInterrupt:
     print("Program interrupted. Cleaning up...")
     display.lcd_clear()

@@ -60,7 +60,7 @@ def playQuran(random_number,is_sobuh_now=False):
 	
 # Play sound
 def playSound(random_number,is_adan_and_quran=False,azan_time=None,is_sobuh_now=False,ramadan=None):
-	general.turnIzaa(is_from_mic=False)
+	general.turnIzaa(False)
 	time.sleep(1)
 	if ramadan:
 		if ramadan.get("voice_before_twelve_min_from_imsak_time"):
@@ -89,7 +89,7 @@ def playSound(random_number,is_adan_and_quran=False,azan_time=None,is_sobuh_now=
 			dt.waitUntil(azan_time)
 		playAzan(is_sobuh_now=is_sobuh_now)
 	time.sleep(1)
-	general.turnIzaa(is_from_mic=False,is_to_on=False)
+	general.turnIzaa(is_to_on=False)
 
 # Play sound from file, needed only path and if is_sobuh to decrease volume
 def playFile(file_path,is_sobuh_now=False):
