@@ -5,7 +5,6 @@ import packages.general as general
 from pydub.utils import mediainfo
 from pydub import AudioSegment
 from pydub.playback import play
-# import RPi.GPIO as GPIO
 import time
 import packages.date_time as dt
 
