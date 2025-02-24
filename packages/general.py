@@ -3,7 +3,6 @@ import json
 import packages.file_system as fs 
 import packages.date_time as date_time 
 import RPi.GPIO as GPIO
-import time
 
 # clean up gpio pins
 def cleanUp():
