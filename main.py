@@ -12,9 +12,6 @@ import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
 GPIO.setup(36,GPIO.OUT)
-GPIO.setup(37,GPIO.OUT)
-GPIO.setup(18,GPIO.IN,pull_up_down=GPIO.PUD_UP) # This is for reading switch
-GPIO.output(36,GPIO.LOW)
 GPIO.output(37,GPIO.LOW)
 display = drivers.Lcd()
 
