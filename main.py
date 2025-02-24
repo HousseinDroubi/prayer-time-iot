@@ -6,18 +6,17 @@ import packages.general as general
 import packages.file_system as file_system
 import packages.date_time as date_time
 import time
-# import drivers
-import threading
-# import RPi.GPIO as GPIO
+import drivers
+import RPi.GPIO as GPIO
 
-# GPIO.setmode(GPIO.BOARD)
-# GPIO.setwarnings(False)
-# GPIO.setup(36,GPIO.OUT)
-# GPIO.setup(37,GPIO.OUT)
-# GPIO.setup(18,GPIO.IN,pull_up_down=GPIO.PUD_UP) # This is for reading switch
-# GPIO.output(36,GPIO.LOW)
-# GPIO.output(37,GPIO.LOW)
-# display = drivers.Lcd()
+GPIO.setmode(GPIO.BOARD)
+GPIO.setwarnings(False)
+GPIO.setup(36,GPIO.OUT)
+GPIO.setup(37,GPIO.OUT)
+GPIO.setup(18,GPIO.IN,pull_up_down=GPIO.PUD_UP) # This is for reading switch
+GPIO.output(36,GPIO.LOW)
+GPIO.output(37,GPIO.LOW)
+display = drivers.Lcd()
 
 time.sleep(3)
 
@@ -25,8 +24,7 @@ def main():
     while True:
         last_azan = general.getLastAzanTime()
         if last_azan is None:
-            #TODO: Remove display = None and put display = display
-            general.showTimes(display=None,quran_time=None,azan_time=None,imsak_time=None,is_sobuh_now=False,is_ramadan=False,is_error=True)
+            general.showTimes(display=display,quran_time=None,azan_time=None,imsak_time=None,is_sobuh_now=False,is_ramadan=False,is_error=True)
             return None
         is_sobuh_now = last_azan.get("is_sobuh")
         azan_time=last_azan.get("azan_time")
@@ -38,8 +36,7 @@ def main():
             ten_minutes_before_imsak = last_azan.get("ten_minutes_before_imsak")
             twelve_minutes_before_imsak = date_time.removeSecondsFromTime(120,ten_minutes_before_imsak)
 
-            # TODO: remove display = None and put display = display 
-            general.showTimes(display=None,quran_time=None,azan_time=azan_time,imsak_time=imsak_time,is_sobuh_now=None,is_ramadan=True,is_error=False)
+            general.showTimes(display=display,quran_time=None,azan_time=azan_time,imsak_time=imsak_time,is_sobuh_now=None,is_ramadan=True,is_error=False)
             # Get the appropriate random number
             while True:
                 random_number = general.getRandomNumberFromFile()
@@ -123,8 +120,7 @@ def main():
         print(f'azan_time is {azan_time}')
 
         #show times
-        #TODO: Remove display = None and put display = display 
-        general.showTimes(display=None,quran_time=quran_time,azan_time=azan_time,imsak_time=None,is_sobuh_now=is_sobuh_now,is_ramadan=False,is_error=False)
+        general.showTimes(display=display,quran_time=quran_time,azan_time=azan_time,imsak_time=None,is_sobuh_now=is_sobuh_now,is_ramadan=False,is_error=False)
         
         # Time is either at quran time or before it
         if date_time.compareCurrentTimeWith(quran_time) != 1:
