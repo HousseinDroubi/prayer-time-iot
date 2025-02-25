@@ -59,7 +59,7 @@ def playQuran(random_number,is_sobuh_now=False):
 	
 # Play sound
 def playSound(random_number,is_adan_and_quran=False,azan_time=None,is_sobuh_now=False,ramadan=None):
-	general.turnIzaa(False)
+	general.turnIzaa()
 	time.sleep(1)
 	if ramadan:
 		if ramadan.get("voice_before_twelve_min_from_imsak_time"):
