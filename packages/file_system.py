@@ -69,7 +69,7 @@ def playSound(random_number,is_adan_and_quran=False,azan_time=None,is_sobuh_now=
 			dt.waitUntil(ramadan.get("ten_minutes_before_imsak_time"))
 
 		if ramadan.get("imsak_sound_before_imsak_time"):
-			random_number_for_imsak_sound = general.generateRandomNumber(1,5)
+			random_number_for_imsak_sound = general.generateRandomNumber(1,4)
 			file_path = f"./ramadan/sounds/sound_{random_number_for_imsak_sound}.mp3"
 			playFile(file_path=file_path,is_sobuh_now=True)
 			dt.waitUntil(ramadan.get("imsak_time"))
