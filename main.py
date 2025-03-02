@@ -6,14 +6,15 @@ import packages.general as general
 import packages.file_system as file_system
 import packages.date_time as date_time
 import time
-import drivers
-import RPi.GPIO as GPIO
+# TODO: Uncomment below lines (10->17)
+# import drivers
+# import RPi.GPIO as GPIO
 
-GPIO.setmode(GPIO.BOARD)
-GPIO.setwarnings(False)
-GPIO.setup(36,GPIO.OUT)
-GPIO.output(37,GPIO.LOW)
-display = drivers.Lcd()
+# GPIO.setmode(GPIO.BOARD)
+# GPIO.setwarnings(False)
+# GPIO.setup(36,GPIO.OUT)
+# GPIO.output(37,GPIO.LOW)
+# display = drivers.Lcd()
 
 time.sleep(3)
 
@@ -21,7 +22,9 @@ def main():
     while True:
         last_azan = general.getLastAzanTime()
         if last_azan is None:
-            general.showTimes(display=display,quran_time=None,azan_time=None,imsak_time=None,is_sobuh_now=False,is_ramadan=False,is_error=True)
+            # TODO: remove below line and uncomment line below it
+            general.showTimes(display=None,quran_time=None,azan_time=None,imsak_time=None,is_sobuh_now=False,is_ramadan=False,is_error=True)
+            # general.showTimes(display=display,quran_time=None,azan_time=None,imsak_time=None,is_sobuh_now=False,is_ramadan=False,is_error=True)
             return None
         is_sobuh_now = last_azan.get("is_sobuh")
         azan_time=last_azan.get("azan_time")
@@ -33,7 +36,9 @@ def main():
             ten_minutes_before_imsak = last_azan.get("ten_minutes_before_imsak")
             twelve_minutes_before_imsak = date_time.removeSecondsFromTime(120,ten_minutes_before_imsak)
 
-            general.showTimes(display=display,quran_time=None,azan_time=azan_time,imsak_time=imsak_time,is_sobuh_now=None,is_ramadan=True,is_error=False)
+            # TODO: remove below line and uncomment line below it
+            general.showTimes(display=None,quran_time=None,azan_time=azan_time,imsak_time=imsak_time,is_sobuh_now=None,is_ramadan=True,is_error=False)
+            # general.showTimes(display=display,quran_time=None,azan_time=azan_time,imsak_time=imsak_time,is_sobuh_now=None,is_ramadan=True,is_error=False)
             # Get the appropriate random number
             while True:
                 random_number = general.getRandomNumberFromFile()
@@ -151,6 +156,7 @@ try:
     main()
 except KeyboardInterrupt:
     print("Program interrupted. Cleaning up...")
-    display.lcd_clear()
-    general.cleanUp()
+    # TODO: Uncomment below 2 lines
+    # display.lcd_clear()
+    # general.cleanUp()
 
