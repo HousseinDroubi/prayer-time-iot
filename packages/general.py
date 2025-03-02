@@ -61,7 +61,7 @@ def convertDictionaryToString(dictionary):
 def convertIntegerToString(number):
 	return str(number)
 
-# The below function is to convert integer to string
+# The below function is to generate random and convert it to to string
 def getRandomNumberFromFile():
 	random_number = generateRandomNumber(1,19)
 	return convertIntegerToString(random_number)
