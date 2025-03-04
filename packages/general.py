@@ -3,49 +3,40 @@ import json
 import packages.file_system as fs 
 import packages.date_time as date_time 
 
-# TODO: uncomment line below it
-# import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 
 # clean up gpio pins
 def cleanUp():
 	print("Cleaning GPIO")
-	# GPIO.cleanup()
+	GPIO.cleanup()
 
 # toggle izaa 
 def turnIzaa(is_to_on=True):
 	if is_to_on:
 		print("Turn on Izaa from main program")
-		# TODO: uncomment line below it
-		# GPIO.output(36,GPIO.HIGH) # Open relay from main program
+		GPIO.output(36,GPIO.HIGH) # Open relay from main program
 	else:
 		print("Turn off Izaa from main program")
-		# TODO: uncomment line below it
-		# GPIO.output(36,GPIO.LOW) # Close relay from main program
+		GPIO.output(36,GPIO.LOW) # Close relay from main program
 
 # The below function is to show data on LCD
 def showTimes(display,quran_time,azan_time,imsak_time,is_sobuh_now=False,is_ramadan = False,is_error = False):
 	if is_error:
 		print("Showing Something went wrong")
-		# TODO: Remove below two lines and uncomment two lines below them
-		print("Something went")
-		print("Wrong")
-		# display.lcd_display_string(" Something went ",1)
-		# display.lcd_display_string("      wrong     ",2)
+		display.lcd_display_string(" Something went ",1)
+		display.lcd_display_string("      wrong     ",2)
 		return
 	if is_ramadan:
 		print(f"Imsak at: {imsak_time}")
-		# TODO: uncomment below line
-		# display.lcd_display_string(f"Imsak at: {imsak_time}", 1)
+		display.lcd_display_string(f"Imsak at: {imsak_time}", 1)
 	elif is_sobuh_now:
 		print("----------------------")
 		display.lcd_display_string(f" -------------- ", 1)
 	else:	
 		print(f"Quran at: {quran_time}")
-		# TODO: uncomment below line
-		# display.lcd_display_string(f"Quran at: {quran_time}", 1)
+		display.lcd_display_string(f"Quran at: {quran_time}", 1)
 	
-	# TODO: uncomment below line
-	# display.lcd_display_string(f" Azan at: {azan_time} ", 2)
+	display.lcd_display_string(f" Azan at: {azan_time} ", 2)
 	print(f" Azan at: {azan_time} ")
 
 # get random number
