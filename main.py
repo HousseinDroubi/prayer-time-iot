@@ -13,7 +13,7 @@ import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
 GPIO.setup(36,GPIO.OUT)
-GPIO.output(37,GPIO.LOW)
+GPIO.output(36,GPIO.LOW)
 display = drivers.Lcd()
 
 time.sleep(3)
