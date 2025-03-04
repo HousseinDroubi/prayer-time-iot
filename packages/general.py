@@ -81,13 +81,13 @@ def getLastAzanTime():
 		elif date_time.compareDateWith(today_times.get("date"))==0:
 			# If current time is the same as sobuh or less than it
 			if date_time.compareCurrentTimeWith(today_times.get("sobuh"))!=1:
-				return {"azan_time":today_times.get("sobuh"),"date":today_times.get("date"),"ten_minutes_before_imsak":today_times.get("ten_minutes_before_imsak"),"imsak":today_times.get("imsak"),"is_sobuh":True}
+				return {"azan_time":today_times.get("sobuh"),"date":today_times.get("date"),"twenty_minutes_before_imsak":today_times.get("twenty_minutes_before_imsak"),"ten_minutes_before_imsak":today_times.get("ten_minutes_before_imsak"),"imsak":today_times.get("imsak"),"is_sobuh":True}
 			# If current time is the same as dohur or less than it
 			elif date_time.compareCurrentTimeWith(today_times.get("dohur"))!=1:
-				return {"azan_time":today_times.get("dohur"),"date":today_times.get("date"),"ten_minutes_before_imsak":today_times.get("ten_minutes_before_imsak"),"imsak":today_times.get("imsak"),"is_sobuh":False}
+				return {"azan_time":today_times.get("dohur"),"date":today_times.get("date"),"twenty_minutes_before_imsak":today_times.get("twenty_minutes_before_imsak"),"ten_minutes_before_imsak":today_times.get("ten_minutes_before_imsak"),"imsak":today_times.get("imsak"),"is_sobuh":False}
 			# If current time is the same as meghreb or less than it
 			elif date_time.compareCurrentTimeWith(today_times.get("meghreb"))!=1:
-				return {"azan_time":today_times.get("meghreb"),"date":today_times.get("date"),"ten_minutes_before_imsak":today_times.get("ten_minutes_before_imsak"),"imsak":today_times.get("imsak"),"is_sobuh":False}
+				return {"azan_time":today_times.get("meghreb"),"date":today_times.get("date"),"twenty_minutes_before_imsak":today_times.get("twenty_minutes_before_imsak"),"ten_minutes_before_imsak":today_times.get("ten_minutes_before_imsak"),"imsak":today_times.get("imsak"),"is_sobuh":False}
 			else:
 				# If current time is the greater than meghreb and only one today left in json which must be deleted
 				if(len(all_times)==1):
@@ -97,13 +97,13 @@ def getLastAzanTime():
 				else:
 					today_times = all_times[1]
 					fs.removeFirstDay(all_times)
-					return {"azan_time":today_times.get("sobuh"),"date":today_times.get("date"),"ten_minutes_before_imsak":today_times.get("ten_minutes_before_imsak"),"imsak":today_times.get("imsak"),"is_sobuh":True}
+					return {"azan_time":today_times.get("sobuh"),"date":today_times.get("date"),"twenty_minutes_before_imsak":today_times.get("twenty_minutes_before_imsak"),"ten_minutes_before_imsak":today_times.get("ten_minutes_before_imsak"),"imsak":today_times.get("imsak"),"is_sobuh":True}
 		# If today is less than first day in json
 		else:
 			# If there's only the as difference between today and first day in json is "one", means that today is deleted from json and must return second day's sobuh
 			if date_time.getNumberOfDaysBetweenTwoDates(date_time.getTodayDate(),all_times[0].get("date"))==1:
 				today_times = all_times[0]
-				return {"azan_time":today_times.get("sobuh"),"date":today_times.get("date"),"ten_minutes_before_imsak":today_times.get("ten_minutes_before_imsak"),"imsak":today_times.get("imsak"),"is_sobuh":True}
+				return {"azan_time":today_times.get("sobuh"),"date":today_times.get("date"),"twenty_minutes_before_imsak":today_times.get("twenty_minutes_before_imsak"),"ten_minutes_before_imsak":today_times.get("ten_minutes_before_imsak"),"imsak":today_times.get("imsak"),"is_sobuh":True}
 			# If there are many days difference between today and first day in json
 			return None
 		

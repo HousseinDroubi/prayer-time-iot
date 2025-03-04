@@ -32,54 +32,67 @@ def main():
         quran_time = general.getQuranTime(random_number,azan_time)
 
         if(date_time.isRamadan(last_azan.get("date")) and last_azan.get("is_sobuh")):
+            # Get imsak time
             imsak_time = last_azan.get("imsak")
+            
+            # Get 22 mins before imsak
+            twenty_two_minutes_before_imsak = date_time.removeSecondsFromTime(120,last_azan.get("twenty_minutes_before_imsak"))
+            
+            # Get 10 mins before imsak
             ten_minutes_before_imsak = last_azan.get("ten_minutes_before_imsak")
-            twelve_minutes_before_imsak = date_time.removeSecondsFromTime(120,ten_minutes_before_imsak)
 
             # TODO: remove below line and uncomment line below it
             general.showTimes(display=None,quran_time=None,azan_time=azan_time,imsak_time=imsak_time,is_sobuh_now=None,is_ramadan=True,is_error=False)
             # general.showTimes(display=display,quran_time=None,azan_time=azan_time,imsak_time=imsak_time,is_sobuh_now=None,is_ramadan=True,is_error=False)
+            
             # Get the appropriate random number
             while True:
                 random_number = general.getRandomNumberFromFile()
+                # Get quran time with taking into consideration the random number
                 sound_duration = file_system.getQuranSoundDuration(random_number) // 60
                 # Accept quran duration if it's equal to 7
                 if sound_duration == 7:
                     break
-            # Get quran time with taking into consideration the random number
             
-            if date_time.getNumberOfDaysBetweenTwoDates(date_1=date_time.getTodayDate(),date_2=last_azan.get("date")) == 1 or date_time.compareCurrentTimeWith(twelve_minutes_before_imsak) != 1:
-                # If time is not the same as 12 min before imsak, then wait until 12 min before imsak
-                if date_time.compareCurrentTimeWith(twelve_minutes_before_imsak) == -1:
-                    date_time.waitUntil(twelve_minutes_before_imsak)
+
+            if date_time.getNumberOfDaysBetweenTwoDates(date_1=date_time.getTodayDate(),date_2=last_azan.get("date")) == 1 or date_time.compareCurrentTimeWith(twenty_two_minutes_before_imsak) != 1:
+                
+                # If time is not the same as 22 min before imsak, then wait until 22 min before imsak
+                if date_time.compareCurrentTimeWith(twenty_two_minutes_before_imsak) == -1:
+                    date_time.waitUntil(twenty_two_minutes_before_imsak)
+
+                # Below means that the current time is before midnight
                 elif date_time.getNumberOfDaysBetweenTwoDates(date_1=date_time.getTodayDate(),date_2=last_azan.get("date")) == 1:
-                    time_to_wait = date_time.getSecondsStartingBeforeMidnightTo(goal_time=twelve_minutes_before_imsak)
+                    time_to_wait = date_time.getSecondsStartingBeforeMidnightTo(goal_time=twenty_two_minutes_before_imsak)
                     print(f"Waiting {time_to_wait//3600} hours or {time_to_wait//60} minutes or {time_to_wait}")
                     time.sleep(time_to_wait)
                 
                 file_system.playSound(random_number=random_number,is_adan_and_quran=None,
                     azan_time=None,is_sobuh_now=None,
                     ramadan={
-                        "voice_before_twelve_min_from_imsak_time":True,
+                        "voice_before_twenty_two_min_from_imsak_time":True,
                         "ten_minutes_before_imsak_time":ten_minutes_before_imsak,
-                        "imsak_sound_before_imsak_time":True,
+                        "voice_before_ten_min_from_imsak_time":True,
+                        "imsak_music":True,
                         "imsak_time":imsak_time,
                         "voice_before_quran_time":True,
                         "azan_time":azan_time
                     })
 
-            # This time is after 12 minutes before imsak
+            # This time is after 22 minutes before imsak
             # Check if time is before or equal 10 minutes before imsak
             elif date_time.compareCurrentTimeWith(ten_minutes_before_imsak) !=1:
+                
                 # If time is not the same as 10 min before imsak, then wait until 10 min before imsak
                 if(date_time.compareCurrentTimeWith(ten_minutes_before_imsak) == -1):
                     date_time.waitUntil(ten_minutes_before_imsak)
                 file_system.playSound(random_number=random_number,is_adan_and_quran=None,
                     azan_time=None,is_sobuh_now=None,
                     ramadan={
-                        "voice_before_twelve_min_from_imsak_time":False,
+                        "voice_before_twenty_two_min_from_imsak_time":False,
                         "ten_minutes_before_imsak_time":None,
-                        "imsak_sound_before_imsak_time":True,
+                        "voice_before_ten_min_from_imsak_time":True,
+                        "imsak_music":True,
                         "imsak_time":imsak_time,
                         "voice_before_quran_time":True,
                         "azan_time":azan_time
@@ -93,9 +106,10 @@ def main():
                 file_system.playSound(random_number=random_number,is_adan_and_quran=None,
                     azan_time=None,is_sobuh_now=None,
                     ramadan={
-                        "voice_before_twelve_min_from_imsak_time":False,
+                        "voice_before_twenty_two_min_from_imsak_time":False,
                         "ten_minutes_before_imsak_time":None,
-                        "imsak_sound_before_imsak_time":False,
+                        "voice_before_ten_min_from_imsak_time":False,
+                        "imsak_music":False,
                         "imsak_time":None,
                         "voice_before_quran_time":True,
                         "azan_time":azan_time
@@ -122,7 +136,9 @@ def main():
         print(f'azan_time is {azan_time}')
 
         #show times
-        general.showTimes(display=display,quran_time=quran_time,azan_time=azan_time,imsak_time=None,is_sobuh_now=is_sobuh_now,is_ramadan=False,is_error=False)
+        # TODO: remove below line and uncomment line below it
+        general.showTimes(display=None,quran_time=quran_time,azan_time=azan_time,imsak_time=None,is_sobuh_now=is_sobuh_now,is_ramadan=False,is_error=False)
+        # general.showTimes(display=display,quran_time=quran_time,azan_time=azan_time,imsak_time=None,is_sobuh_now=is_sobuh_now,is_ramadan=False,is_error=False)
         
         # Time is either at quran time or before it
         if date_time.compareCurrentTimeWith(quran_time) != 1:
