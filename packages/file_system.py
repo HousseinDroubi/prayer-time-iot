@@ -65,27 +65,28 @@ def playSound(random_number,is_adan_and_quran=False,azan_time=None,is_sobuh_now=
 		if ramadan.get("voice_before_twenty_two_min_from_imsak_time"):
 			random_number_for_voice_before_imsak = general.generateRandomNumber(1,5)
 			file_path = f"./ramadan/voices/before_imsak/20_min/voice_{random_number_for_voice_before_imsak}.mp3"
-			playFile(file_path=file_path,is_sobuh_now=True)
+			playFile(file_path=file_path)
+			time.sleep(1)
 			random_number_for_imsak_sound = general.generateRandomNumber(1,4)
 			file_path = f"./ramadan/sounds/sound_{random_number_for_imsak_sound}.mp3"			
-			playFile(file_path=file_path,is_sobuh_now=True)
+			playFile(file_path=file_path)
 			dt.waitUntil(ramadan.get("ten_minutes_before_imsak_time"))
 		
 		if ramadan.get("voice_before_ten_min_from_imsak_time"):
 			file_path = f"./ramadan/voices/before_imsak/10_min/voice.mp3"
-			playFile(file_path=file_path,is_sobuh_now=True)
+			playFile(file_path=file_path)
 			time.sleep(1)
 
 		if ramadan.get("imsak_music"):
 			random_number_for_imsak_sound = general.generateRandomNumber(1,4)
 			file_path = f"./ramadan/sounds/sound_{random_number_for_imsak_sound}.mp3"
-			playFile(file_path=file_path,is_sobuh_now=True)
+			playFile(file_path=file_path)
 			dt.waitUntil(ramadan.get("imsak_time"))
 		
 		if ramadan.get("voice_before_quran_time"):
 			file_path = f"./ramadan/voices/before_imsak/0_min/voice.mp3"
-			playFile(file_path=file_path,is_sobuh_now=True)
-			time.sleep(0.5)
+			playFile(file_path=file_path)
+			time.sleep(1)
 			playQuran(random_number=random_number,is_sobuh_now=True)
 			dt.waitUntil(ramadan.get("azan_time"))
 			playAzan(is_sobuh_now=True)
