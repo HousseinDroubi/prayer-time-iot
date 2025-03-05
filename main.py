@@ -16,7 +16,7 @@ GPIO.setup(36,GPIO.OUT)
 GPIO.output(36,GPIO.LOW)
 display = drivers.Lcd()
 
-time.sleep(3)
+time.sleep(1)
 
 def main():
     while True:
