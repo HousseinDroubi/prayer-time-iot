@@ -2,6 +2,18 @@ import random
 import json
 import packages.file_system as fs 
 import packages.date_time as date_time 
+from dotenv import load_dotenv
+import os
+
+# Load environment variables from the .env file
+load_dotenv()
+
+# env variables
+# Izaa pin number
+IZAA_PIN = os.getenv('IZAA_PIN')
+# Quran
+START_QURAN_SOUND = os.getenv('START_QURAN_SOUND')
+END_QURAN_SOUND = os.getenv('END_QURAN_SOUND')
 
 # import RPi.GPIO as GPIO
 
@@ -14,10 +26,10 @@ def cleanUp():
 def turnIzaa(is_to_on=True):
 	if is_to_on:
 		print("Turn on Izaa from main program")
-		# GPIO.output(36,GPIO.HIGH) # Open relay from main program
+		# GPIO.output(IZAA_PIN,GPIO.HIGH) # Open relay from main program
 	else:
 		print("Turn off Izaa from main program")
-		# GPIO.output(36,GPIO.LOW) # Close relay from main program
+		# GPIO.output(IZAA_PIN,GPIO.LOW) # Close relay from main program
 
 # The below function is to show data on LCD
 def showTimes(display,quran_time,azan_time,imsak_time,is_sobuh_now=False,is_ramadan = False,is_error = False):
@@ -54,7 +66,7 @@ def convertIntegerToString(number):
 
 # The below function is to generate random and convert it to to string
 def getRandomNumberFromFile():
-	random_number = generateRandomNumber(1,19)
+	random_number = generateRandomNumber(START_QURAN_SOUND,END_QURAN_SOUND)
 	return convertIntegerToString(random_number)
 
 def getLastAzanTime():
