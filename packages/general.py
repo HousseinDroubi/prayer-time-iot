@@ -12,8 +12,8 @@ load_dotenv()
 # Izaa pin number
 IZAA_PIN = os.getenv('IZAA_PIN')
 # Quran
-START_QURAN_SOUND = os.getenv('START_QURAN_SOUND')
-END_QURAN_SOUND = os.getenv('END_QURAN_SOUND')
+START_QURAN_SOUND = int(os.getenv('START_QURAN_SOUND'))
+END_QURAN_SOUND = int(os.getenv('END_QURAN_SOUND'))
 
 # import RPi.GPIO as GPIO
 

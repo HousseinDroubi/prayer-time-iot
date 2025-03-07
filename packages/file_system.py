@@ -15,15 +15,14 @@ load_dotenv()
 
 # env variables
 # Ramdan timing
-START_DUAA_VOICE = os.getenv('START_DUAA_VOICE')
-END_DUAA_VOICE = os.getenv('END_DUAA_VOICE')
+START_DUAA_VOICE = int(os.getenv('START_DUAA_VOICE'))
+END_DUAA_VOICE = int(os.getenv('END_DUAA_VOICE'))
 # Imsak Music
-START_IMSAK_MUSIC = os.getenv('START_IMSAK_MUSIC')
-END_IMSAK_MUSIC = os.getenv('END_IMSAK_MUSIC')
+START_IMSAK_MUSIC = int(os.getenv('START_IMSAK_MUSIC'))
+END_IMSAK_MUSIC = int(os.getenv('END_IMSAK_MUSIC'))
 # Azan Music
-START_AZAN_SOUND = os.getenv('START_AZAN_SOUND')
-END_AZAN_SOUND = os.getenv('END_AZAN_SOUND')
-
+START_AZAN_SOUND = int(os.getenv('START_AZAN_SOUND'))
+END_AZAN_SOUND = int(os.getenv('END_AZAN_SOUND'))
 
 TIMES_FILE_PATH = "times.json"
 
