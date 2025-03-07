@@ -7,14 +7,14 @@ import packages.file_system as file_system
 import packages.date_time as date_time
 import time
 
-import drivers
-import RPi.GPIO as GPIO
+# import drivers
+# import RPi.GPIO as GPIO
 
-GPIO.setmode(GPIO.BOARD)
-GPIO.setwarnings(False)
-GPIO.setup(36,GPIO.OUT)
-GPIO.output(36,GPIO.LOW)
-display = drivers.Lcd()
+# GPIO.setmode(GPIO.BOARD)
+# GPIO.setwarnings(False)
+# GPIO.setup(36,GPIO.OUT)
+# GPIO.output(36,GPIO.LOW)
+# display = drivers.Lcd()
 
 time.sleep(1)
 
@@ -22,7 +22,8 @@ def main():
     while True:
         last_azan = general.getLastAzanTime()
         if last_azan is None:
-            general.showTimes(display=display,quran_time=None,azan_time=None,imsak_time=None,is_sobuh_now=False,is_ramadan=False,is_error=True)
+            general.showTimes(display=None,quran_time=None,azan_time=None,imsak_time=None,is_sobuh_now=False,is_ramadan=False,is_error=True)
+            # general.showTimes(display=display,quran_time=None,azan_time=None,imsak_time=None,is_sobuh_now=False,is_ramadan=False,is_error=True)
             return None
         is_sobuh_now = last_azan.get("is_sobuh")
         azan_time=last_azan.get("azan_time")
@@ -39,7 +40,8 @@ def main():
             # Get 10 mins before imsak
             ten_minutes_before_imsak = last_azan.get("ten_minutes_before_imsak")
 
-            general.showTimes(display=display,quran_time=None,azan_time=azan_time,imsak_time=imsak_time,is_sobuh_now=None,is_ramadan=True,is_error=False)
+            general.showTimes(display=None,quran_time=None,azan_time=azan_time,imsak_time=imsak_time,is_sobuh_now=None,is_ramadan=True,is_error=False)
+            # general.showTimes(display=display,quran_time=None,azan_time=azan_time,imsak_time=imsak_time,is_sobuh_now=None,is_ramadan=True,is_error=False)
             
             # Get the appropriate random number
             while True:
@@ -132,7 +134,8 @@ def main():
         print(f'azan_time is {azan_time}')
 
         #show times
-        general.showTimes(display=display,quran_time=quran_time,azan_time=azan_time,imsak_time=None,is_sobuh_now=is_sobuh_now,is_ramadan=False,is_error=False)
+        general.showTimes(display=None,quran_time=quran_time,azan_time=azan_time,imsak_time=None,is_sobuh_now=is_sobuh_now,is_ramadan=False,is_error=False)
+        # general.showTimes(display=display,quran_time=quran_time,azan_time=azan_time,imsak_time=None,is_sobuh_now=is_sobuh_now,is_ramadan=False,is_error=False)
         
         # Time is either at quran time or before it
         if date_time.compareCurrentTimeWith(quran_time) != 1:
@@ -166,6 +169,6 @@ try:
     main()
 except KeyboardInterrupt:
     print("Program interrupted. Cleaning up...")
-    display.lcd_clear()
+    # display.lcd_clear()
     general.cleanUp()
 
