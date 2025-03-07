@@ -6,14 +6,22 @@ import packages.general as general
 import packages.file_system as file_system
 import packages.date_time as date_time
 import time
+from dotenv import load_dotenv
+import os
+
+# Load environment variables from the .env file
+load_dotenv()
+# env variables
+# Izaa pin number
+IZAA_PIN = os.getenv('IZAA_PIN')
 
 # import drivers
 # import RPi.GPIO as GPIO
 
 # GPIO.setmode(GPIO.BOARD)
 # GPIO.setwarnings(False)
-# GPIO.setup(36,GPIO.OUT)
-# GPIO.output(36,GPIO.LOW)
+# GPIO.setup(IZAA_PIN,GPIO.OUT)
+# GPIO.output(IZAA_PIN,GPIO.LOW)
 # display = drivers.Lcd()
 
 time.sleep(1)
