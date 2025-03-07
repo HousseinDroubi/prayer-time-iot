@@ -8,6 +8,24 @@ from pydub.playback import play
 import time
 import packages.date_time as dt
 
+from dotenv import load_dotenv
+import os
+
+# Load environment variables from the .env file
+load_dotenv()
+
+# env variables
+# Ramdan timing
+START_DUAA_VOICE = os.getenv('START_DUAA_VOICE')
+END_DUAA_VOICE = os.getenv('END_DUAA_VOICE')
+# Imsak Music
+START_IMSAK_MUSIC = os.getenv('START_IMSAK_MUSIC')
+END_IMSAK_MUSIC = os.getenv('END_IMSAK_MUSIC')
+# Azan Music
+START_AZAN_SOUND = os.getenv('START_AZAN_SOUND')
+END_AZAN_SOUND = os.getenv('END_AZAN_SOUND')
+
+
 TIMES_FILE_PATH = "times.json"
 
 # remove first day from times file
@@ -47,7 +65,7 @@ def getQuranSoundDuration(random_number):
 
 # Play azan, here we need a random number for azan when function called then call playFile
 def playAzan(is_sobuh_now=False):
-	random_number_for_azan = general.generateRandomNumber(1,3)
+	random_number_for_azan = general.generateRandomNumber(START_AZAN_SOUND,END_AZAN_SOUND)
 	file_path = f"./azan/azan_{random_number_for_azan}.mp3"
 	playFile(file_path=file_path,is_sobuh_now=is_sobuh_now)
 
@@ -63,11 +81,11 @@ def playSound(random_number,is_adan_and_quran=False,azan_time=None,is_sobuh_now=
 	time.sleep(1)
 	if ramadan:
 		if ramadan.get("voice_before_twenty_two_min_from_imsak_time"):
-			random_number_for_voice_before_imsak = general.generateRandomNumber(1,5)
+			random_number_for_voice_before_imsak = general.generateRandomNumber(START_DUAA_VOICE,END_DUAA_VOICE)
 			file_path = f"./ramadan/voices/before_imsak/20_min/voice_{random_number_for_voice_before_imsak}.mp3"
 			playFile(file_path=file_path)
 			time.sleep(1)
-			random_number_for_imsak_sound = general.generateRandomNumber(1,4)
+			random_number_for_imsak_sound = general.generateRandomNumber(START_IMSAK_MUSIC,END_IMSAK_MUSIC)
 			file_path = f"./ramadan/sounds/sound_{random_number_for_imsak_sound}.mp3"			
 			playFile(file_path=file_path)
 			dt.waitUntil(ramadan.get("ten_minutes_before_imsak_time"))
@@ -78,7 +96,7 @@ def playSound(random_number,is_adan_and_quran=False,azan_time=None,is_sobuh_now=
 			time.sleep(1)
 
 		if ramadan.get("imsak_music"):
-			random_number_for_imsak_sound = general.generateRandomNumber(1,4)
+			random_number_for_imsak_sound = general.generateRandomNumber(START_IMSAK_MUSIC,END_IMSAK_MUSIC)
 			file_path = f"./ramadan/sounds/sound_{random_number_for_imsak_sound}.mp3"
 			playFile(file_path=file_path)
 			dt.waitUntil(ramadan.get("imsak_time"))
