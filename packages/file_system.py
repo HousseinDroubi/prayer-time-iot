@@ -7,6 +7,7 @@ from pydub import AudioSegment
 from pydub.playback import play
 import time
 import packages.date_time as dt
+import vlc
 
 from dotenv import load_dotenv
 
@@ -117,7 +118,14 @@ def playSound(random_number,is_adan_and_quran=False,azan_time=None,is_sobuh_now=
 
 # Play sound from file, needed only path and if is_sobuh to decrease volume
 def playFile(file_path,is_sobuh_now=False):
-	sound = AudioSegment.from_file(file_path)
-	if is_sobuh_now:
-		sound = sound - 3
-	play(sound)
+	try:
+		sound = AudioSegment.from_file(file_path)
+		if is_sobuh_now:
+			sound = sound - 3
+		play(sound)
+	except:
+		player = vlc.MediaPlayer(file_path)
+		player.play()
+		time.sleep(0.5) # This to let the python-vlc work
+		while player.is_playing():
+			continue
