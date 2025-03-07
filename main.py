@@ -1,7 +1,3 @@
-import sys
-sys.path.append('/home/pi-user/lcd')
-sys.path.append('/home/pi-user/pydub')
-
 import packages.general as general
 import packages.file_system as file_system
 import packages.date_time as date_time
@@ -14,6 +10,10 @@ load_dotenv()
 # env variables
 # Izaa pin number
 IZAA_PIN = os.getenv('IZAA_PIN')
+
+import sys
+PATH_TO_LCD_FOLDER = os.getenv('PATH_TO_LCD_FOLDER')
+sys.path.append(PATH_TO_LCD_FOLDER)
 
 # import drivers
 # import RPi.GPIO as GPIO
