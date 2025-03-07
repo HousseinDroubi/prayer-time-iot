@@ -3,9 +3,7 @@ times.json
 times_copy.json
 test.py
 packages/__pycache__
-azan/
-quran/
 __pycache__
 .goutputstr*
-ramadan/
+sounds/
 .env
