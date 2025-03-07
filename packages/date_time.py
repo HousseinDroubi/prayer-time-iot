@@ -2,6 +2,21 @@ from datetime import datetime,timedelta
 import packages.general as general
 import time
 
+from dotenv import load_dotenv
+import os
+
+# Load environment variables from the .env file
+load_dotenv()
+
+# env variables
+# Ramdan timing
+START_OF_RAMADAN = os.getenv('START_OF_RAMADAN')
+END_OF_RAMADAN = os.getenv('END_OF_RAMADAN')
+
+# Summer timing
+START_OF_SUMMER_TIMING = os.getenv('START_OF_SUMMER_TIMING')
+END_OF_SUMMER_TIMING = os.getenv('END_OF_SUMMER_TIMING')
+
 # Get today with dd/mm/yyyy
 def getTodayDate():
     return datetime.today().strftime('%d/%m/%Y')
@@ -76,12 +91,12 @@ def getSecondsStartingBeforeMidnightTo(goal_time):
 # Here, we called is ramadan tomorrow, because when next day is ramadan we need to wait 
 # to time before imsak
 def isRamadan(date):
-    start_of_ramadan = "01/03/2025"
-    end_of_ramadan = "30/03/2025"
+    start_of_ramadan = START_OF_RAMADAN
+    end_of_ramadan = END_OF_RAMADAN
     return compareDateWith(start_of_ramadan,today=date)!=-1 and compareDateWith(end_of_ramadan,today=date)!=1
 
 def isSummerTime():
-    start_of_summer_time = "30/03/2025"
-    end_of_summer_time = "25/10/2025"
+    start_of_summer_time = START_OF_SUMMER_TIMING
+    end_of_summer_time = END_OF_RAMADAN
 
     return compareDateWith(start_of_summer_time)!=-1 and compareDateWith(end_of_summer_time)!=1
