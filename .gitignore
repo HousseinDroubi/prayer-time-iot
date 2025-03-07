@@ -1,9 +1,21 @@
-info.json
+# times
 times.json
 times_copy.json
+
+# test file
 test.py
-packages/__pycache__
+
+# pycache
 __pycache__
+
+# goutput
 .goutputstr*
+
+# sounds
 sounds/
+
+# env file
 .env
+
+# my environment folder
+myenv/
