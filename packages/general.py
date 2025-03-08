@@ -16,6 +16,7 @@ START_QURAN_SOUND = int(os.getenv('START_QURAN_SOUND'))
 END_QURAN_SOUND = int(os.getenv('END_QURAN_SOUND'))
 
 # import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 
 # clean up gpio pins
 def cleanUp():
