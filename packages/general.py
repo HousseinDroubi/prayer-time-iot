@@ -10,7 +10,7 @@ load_dotenv()
 
 # env variables
 # Izaa pin number
-IZAA_PIN = os.getenv('IZAA_PIN')
+IZAA_PIN = int(os.getenv('IZAA_PIN'))
 # Quran
 START_QURAN_SOUND = int(os.getenv('START_QURAN_SOUND'))
 END_QURAN_SOUND = int(os.getenv('END_QURAN_SOUND'))

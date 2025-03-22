@@ -96,7 +96,7 @@ source myenv/bin/activate
 3- Download packages for playing sounds and dotenv
 
 ```
-pip install python-vlc pydub python-dotenv smbus
+pip install RPi.GPIO python-vlc pydub python-dotenv smbus
 ```
 
 4- Run main python file (Make sure that the terminal is navigated to the project's root path)

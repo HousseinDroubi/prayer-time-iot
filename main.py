@@ -9,7 +9,7 @@ import os
 load_dotenv()
 # env variables
 # Izaa pin number
-IZAA_PIN = os.getenv('IZAA_PIN')
+IZAA_PIN = int(os.getenv('IZAA_PIN'))
 
 import sys
 PATH_TO_LCD_FOLDER = os.getenv('PATH_TO_LCD_FOLDER')
