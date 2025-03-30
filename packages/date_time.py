@@ -68,8 +68,6 @@ def removeSecondsFromTime(seconds,time):
 def waitUntil(wait_until_time):
     now = datetime.now()
     target_time = datetime.strptime(wait_until_time,"%H:%M").replace(year=now.year, month=now.month, day=now.day)
-    if isSummerTime():
-        target_time = target_time + timedelta(hours=1)
     time_diff = (target_time - now).total_seconds()
     if(time_diff<0):
         return
@@ -84,8 +82,6 @@ def getSecondsStartingBeforeMidnightTo(goal_time):
         given_time += timedelta(days=1)
     time_difference = given_time - current_time
     seconds_difference = time_difference.total_seconds()
-    if isSummerTime():
-        seconds_difference = seconds_difference +  3600
     return seconds_difference
 
 # Here, we called is ramadan tomorrow, because when next day is ramadan we need to wait 
@@ -94,9 +90,3 @@ def isRamadan(date):
     start_of_ramadan = START_OF_RAMADAN
     end_of_ramadan = END_OF_RAMADAN
     return compareDateWith(start_of_ramadan,today=date)!=-1 and compareDateWith(end_of_ramadan,today=date)!=1
-
-def isSummerTime():
-    start_of_summer_time = START_OF_SUMMER_TIMING
-    end_of_summer_time = END_OF_RAMADAN
-
-    return compareDateWith(start_of_summer_time)!=-1 and compareDateWith(end_of_summer_time)!=1
