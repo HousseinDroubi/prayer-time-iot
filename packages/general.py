@@ -93,11 +93,11 @@ def getLastAzanTime():
 			elif date_time.compareCurrentTimeWith(today_times.get("meghreb"))!=1:
 				return {"azan_time":today_times.get("meghreb"),"date":today_times.get("date"),"twenty_minutes_before_imsak":today_times.get("twenty_minutes_before_imsak"),"ten_minutes_before_imsak":today_times.get("ten_minutes_before_imsak"),"imsak":today_times.get("imsak"),"is_sobuh":False}
 			else:
-				# If current time is the greater than meghreb and only one today left in json which must be deleted
+				# If current time is greater than meghreb and only one day left in json which must be deleted
 				if(len(all_times)==1):
 					fs.removeFirstDay(all_times)
 					return None
-				# If current time is the greater than meghreb and today with other days left in json, so only today must be deleted and must return second day's sobuh
+				# If current time is greater than meghreb and today with other days left in json, so only today must be deleted and must return second day's sobuh
 				else:
 					today_times = all_times[1]
 					fs.removeFirstDay(all_times)
