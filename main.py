@@ -37,7 +37,7 @@ def main():
         random_number = general.getRandomNumberFromFile()
         quran_time = general.getQuranTime(random_number,azan_time)
 
-        if(date_time.isRamadan(last_azan.get("date")) and last_azan.get("is_sobuh")):
+        if(date_time.isRamadan(last_azan.get("date")) and is_sobuh_now):
             # Get imsak time
             imsak_time = last_azan.get("imsak")
             
